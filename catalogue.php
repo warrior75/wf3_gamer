@@ -3,10 +3,10 @@
     require_once(__DIR__.'/config/db.php');
     $pagesGames= 0;
 
-    // if (!isset($_SESSION['user'])) {
-    //     header('Location :index.php');
-    //     die();
-    // }
+    if (!isset($_SESSION['user'])) {
+        header('Location :index.php');
+        die();
+    }
             if(!isset($_POST['action'])) {
                 // Afficher le catalogue entier
                 $query = $pdo->query('SELECT count(id) as total  FROM games');
