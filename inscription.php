@@ -6,6 +6,7 @@ require(__DIR__.'/config/db.php');
 
 if(isset($_POST['action'])){
 
+
 // Déclaration de nos variables 
 
 $email = trim(htmlentities($_POST['email']));
@@ -63,12 +64,12 @@ $errors = [];
     }
 
       // Vérifie si le nom ne contient que des lettres
-      if(!preg_match('[:alpha:]',$lastname)){
+      if(!preg_match('/[a-zA-Z]*/',$lastname)){
         $errors['lastname'] = "Le nom ne doit contenir que des lettres ";
       }
 
       // Vérifie si le nom ne contient que des lettres
-      if(!preg_match('[:alpha:]',$firstname)){
+      if(!preg_match('/[a-zA-Z]*/',$firstname)){
         $errors['firstname'] = "Le prénom ne doit contenir que des lettres ";
       }
 
@@ -91,13 +92,13 @@ $errors = [];
       if( empty($errors)){
 
            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-           $query = $pdo->prepare('INSERT INTO gamers(email,password,firstname,lastname,adresse,zipcode,town,phone,created_at,role) VALUES(:email,:password,:firstname,:lastname,:adresse,:zipcode,:town,:phone,NOW(),"member)');
+           $query = $pdo->prepare('INSERT INTO gamers(email,password,firstname,lastname,adresse,zipcode,town,phone,created_at,role) VALUES(:email,:password,:firstname,:lastname,:adresse,:zipcode,:town,:phone,NOW(),"member")');
            $query->bindValue(':email',$email,PDO::PARAM_STR);
            $query->bindValue(':password',$hashedPassword,PDO::PARAM_STR);
            $query->bindValue(':firstname',$firstname,PDO::PARAM_STR);
            $query->bindValue(':lastname',$lastname,PDO::PARAM_STR);
-           $query->bindValue(':adresse',$adresse,PDO::PARAM_STR);
-           $query->bindValue(':zipcode',$zipcode,PDO::PARAM_INT);
+           $query->bindValue(':adresse',$address,PDO::PARAM_STR);
+           $query->bindValue(':zipcode',$cp,PDO::PARAM_INT);
            $query->bindValue(':town',$town,PDO::PARAM_STR);
            $query->bindValue(':phone',$tel,PDO::PARAM_INT);
            $query->execute();
@@ -122,6 +123,8 @@ $errors = [];
    
       }
 
+
+print_r($errors);
 }
     
 
@@ -177,7 +180,7 @@ $errors = [];
       </div>
     </div>
     <div class="formInscription col-md-4 col-md-offset-4">
-
+       
             <form method="POST" action="#">
               <div class="form-group <?php if(isset($errors['email'])) { echo "has-error" ;}?>">
                 <label for="email">Email</label>
