@@ -58,7 +58,10 @@ if (isset($_POST['action'])) {
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
             body {
-                    padding-bottom: 20px;
+
+                
+                padding-bottom: 20px;
+
             }
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
