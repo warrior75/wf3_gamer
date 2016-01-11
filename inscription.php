@@ -63,17 +63,17 @@ $errors = [];
     }
 
       // Vérifie si le nom ne contient que des lettres
-      if(!preg_match('/[a-zA-Z]*/',$lastname)){
+      if(!preg_match('[:alpha:]',$lastname)){
         $errors['lastname'] = "Le nom ne doit contenir que des lettres ";
       }
 
       // Vérifie si le nom ne contient que des lettres
-      if(!preg_match('/[a-zA-Z]*/',$firstname)){
+      if(!preg_match('[:alpha:]',$firstname)){
         $errors['firstname'] = "Le prénom ne doit contenir que des lettres ";
       }
 
       // Vérification du code postal
-      if(!preg_match('/\d*/', $cp) || strlen($cp) != 5 ){
+      if(!ctype_digit($cp) || strlen($cp) != 5 ){
         $errors['cp'] = "Le code postal doit contenir 5 chiffres";
       }
 
@@ -182,7 +182,7 @@ $errors = [];
       <?php print_r($errors); ?>
     <?php endif; ?>
             <form method="POST" action="#">
-              <div class="form-group">
+              <div class="form-group <?php if(isset($errors['email'])) { echo "has-error" ;}?>">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
                   <span id="helpBlock2" class="help-block">
@@ -192,7 +192,7 @@ $errors = [];
                   </span>     
               </div>
 
-              <div class="form-group ">
+              <div class="form-group <?php if(isset($errors['password'])) { echo "has-error" ;}?>">
 
                 <label for="password">Mot de Passe</label>
 
@@ -209,29 +209,59 @@ $errors = [];
                 <input type="password" class="form-control" id="confirmPassword" placeholder="confirm Password" name="confirmPassword" required>
 
               </div>
-              <div class="form-group">
+              <div class="form-group <?php if(isset($errors['lastname'])) { echo "has-error" ;}?>">
                 <label for="lastname">Nom</label>
                 <input type="text" class="form-control" id="lastname" placeholder="lastname" name="lastname" required>
+                  <span id="helpBlock2" class="help-block">
+                    <?php if(isset($errors['lastname'])) : ?>
+                      <?php echo $errors['lastname'];?>
+                    <?php endif; ?>
+                  </span>
               </div>
-              <div class="form-group">
+              <div class="form-group <?php if(isset($errors['firstname'])) { echo "has-error" ;}?> ">
                 <label for="firstname">Prénom</label>
                 <input type="text" class="form-control" id="firstname" placeholder="firstname" name="firstname" required>
+                 <span id="helpBlock2" class="help-block">
+                    <?php if(isset($errors['firstname'])) : ?>
+                      <?php echo $errors['firstname'];?>
+                    <?php endif; ?>
+                  </span>
               </div>
-              <div class="form-group">
+              <div class="form-group <?php if(isset($errors['address'])) { echo "has-error" ;}?>">
                 <label for="address">Adresse</label>
                 <input type="text" class="form-control" id="address" placeholder="address" name="address" required>
+                 <span id="helpBlock2" class="help-block">
+                    <?php if(isset($errors['address'])) : ?>
+                      <?php echo $errors['address'];?>
+                    <?php endif; ?>
+                  </span>
               </div>
-              <div class="form-groups">
+              <div class="form-group <?php if(isset($errors['cp'])) { echo "has-error" ;}?>">
                 <label for="codePostal">Code Postal</label>
                 <input type="text" class="form-control" id="codePostal" placeholder="codePostal" name="cp" required>
+                 <span id="helpBlock2" class="help-block">
+                    <?php if(isset($errors['cp'])) : ?>
+                      <?php echo $errors['cp'];?>
+                    <?php endif; ?>
+                  </span>
               </div>
-              <div class="form-group">
+              <div class="form-group <?php if(isset($errors['town'])) { echo "has-error" ;}?>">
                 <label for="town">Ville</label>
                 <input type="text" class="form-control" id="town" placeholder="Ville" name="town" required>
+                 <span id="helpBlock2" class="help-block">
+                    <?php if(isset($errors['town'])) : ?>
+                      <?php echo $errors['town'];?>
+                    <?php endif; ?>
+                  </span>
               </div>
-              <div class="form-group">
+              <div class="form-group <?php if(isset($errors['tel'])) { echo "has-error" ;}?>">
                 <label for="tel">Téléphone</label>
                 <input type="tel" class="form-control" id="tel" placeholder="telephone" name="tel" required>
+                 <span id="helpBlock2" class="help-block">
+                    <?php if(isset($errors['tel'])) : ?>
+                      <?php echo $errors['tel'];?>
+                    <?php endif; ?>
+                  </span>
               </div>
               
               <button type="submit" name="action" class="btn btn-primary">Valider</button>
