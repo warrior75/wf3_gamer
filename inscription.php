@@ -181,7 +181,7 @@ print_r($errors);
     </div>
     <div class="formInscription col-md-4 col-md-offset-4">
        
-            <form method="POST" action="#">
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
               <div class="form-group <?php if(isset($errors['email'])) { echo "has-error" ;}?>">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
