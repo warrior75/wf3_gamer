@@ -13,7 +13,7 @@ if (isset($_POST['action'])) {
 
 	// 1. récupération de l'utilisateur dans la bdd grâce à son email
 
-	$query = $pdo -> prepare('SELECT email,password FROM users WHERE email = :email');
+	$query = $pdo -> prepare('SELECT email,password FROM gamers WHERE email = :email');
 	$query -> bindValue('email',$email,PDO::PARAM_STR);
 	$query -> execute();
 	$userInfos = $query -> fetch();
@@ -26,7 +26,7 @@ if (isset($_POST['action'])) {
 			//On stocke le user en session mais on retire le password avant
 			unset($userInfos['password']);
 			$_SESSION['user']=$userInfos;
-			header('Location:catalogue.php');
+			header('Location: catalogue.php');
 			die();
 		}
 		else{
