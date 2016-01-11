@@ -26,7 +26,7 @@ if (isset($_POST['action'])) {
 			//On stocke le user en session mais on retire le password avant
 			unset($userInfos['password']);
 			$_SESSION['user']=$userInfos;
-			header('Location: catalogue.php');
+			header('Location:catalogue.php');
 			die();
 		}
 		else{
@@ -37,7 +37,7 @@ if (isset($_POST['action'])) {
 	}
 	
 	$_SESSION['loginErrors'] = $errors;
-	header("Location: connexion.php");
+	header("Location:connexion.php");
 	die();
 
 }

@@ -2,9 +2,9 @@
     session_start();
     require_once(__DIR__.'/config/db.php');
     $pagesGames= 0;
-
+    print_r($_SESSION['user']);
     if (!isset($_SESSION['user'])) {
-        header('Location :index.php');
+        header('Location: index.php');
         die();
     }
             if(!isset($_POST['action'])) {
@@ -19,7 +19,7 @@
                     if (isset($_GET['page'])&& ($_GET['page']>0) && ($_GET['page']<=$pagesGames)) {
                     $pageActive = $_GET['page'];
                     } else {
-                    $pageActive = 1;
+                        $pageActive = 1;
                     }
                     $debut = ($pageActive-1)*$limiteGames;
                     // 4. COnstruire la requête SQL pour récupérer les 5 premiers Games
