@@ -48,12 +48,12 @@
                 <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Confirmer mot de passe</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="confirmPassword1">Confirmer mot de passe</label>
+                <input type="password" class="form-control" id="confirmPassword1" placeholder="confirm Password">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Nom</label>
@@ -72,11 +72,11 @@
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Confirmer mot de passe</label>
+                <label for="exampleInputPassword1">Ville</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Confirmer mot de passe</label>
+                <label for="exampleInputPassword1">Téléphone</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
               </div>
               
