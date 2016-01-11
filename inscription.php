@@ -49,19 +49,19 @@
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
+                <input type="text" class="form-control" id="password" placeholder="Password">
               </div>
               <div class="form-group">
                 <label for="confirmPassword1">Confirmer mot de passe</label>
-                <input type="password" class="form-control" id="confirmPassword1" placeholder="confirm Password">
+                <input type="text" class="form-control" id="confirmPassword1" placeholder="confirm Password">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Nom</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="lastname">Nom</label>
+                <input type="text" class="form-control" id="lastname" placeholder="lastname">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Prénom</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="firstname">Prénom</label>
+                <input type="text" class="form-control" id="firstname" placeholder="firstname">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Adresse</label>
