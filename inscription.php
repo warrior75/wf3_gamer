@@ -102,6 +102,9 @@ $errors = [];
            $query->bindValue(':phone',$tel,PDO::PARAM_INT);
            $query->execute();
 
+           // Geocode de l'adresse
+          
+
               // L'utilisateur a t-il été bien inséré en bdd ?
               if($query->rowCount() > 0) {
                 // Récupération de l'utilisateur depuis la bdd 
