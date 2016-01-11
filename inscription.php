@@ -45,39 +45,41 @@
             <form>
               <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="">
               </div>
               <div class="form-group">
-                <label for="password">Password </label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
+
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" name="">
+
               </div>
               <div class="form-group">
                 <label for="confirmPassword1">Confirmer mot de passe</label>
-                <input type="password" class="form-control" id="confirmPassword1" placeholder="confirm Password">
+                <input type="password" class="form-control" id="confirmPassword1" placeholder="confirm Password" name="">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Nom</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="lastname">Nom</label>
+                <input type="text" class="form-control" id="lastname" placeholder="lastname" name="">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Prénom</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="firstname">Prénom</label>
+                <input type="text" class="form-control" id="firstname" placeholder="firstname" name="">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Adresse</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="adresse">Adresse</label>
+                <input type="text" class="form-control" id="adresse" placeholder="address" name="">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Code Postal</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Ville</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Téléphone</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="">
               </div>
               
               <button type="submit" name="action" class="btn btn-primary">Valider</button>
