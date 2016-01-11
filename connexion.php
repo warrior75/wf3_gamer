@@ -1,3 +1,48 @@
+<?php 
+session_start(); 
+require(__DIR__.'/config/db.php'); 
+
+// Vérifier que le button submit a été cliqué
+
+if (isset($_POST['action'])) {
+	$email = trim(htmlentities($_POST['email']));
+	$password = trim(htmlentities($_POST['password']));
+
+	// Initialisation d'un tableau d'erreurs
+	$errors = array();
+
+	// 1. récupération de l'utilisateur dans la bdd grâce à son email
+
+	$query = $pdo -> prepare('SELECT email,password FROM users WHERE email = :email');
+	$query -> bindValue('email',$email,PDO::PARAM_STR);
+	$query -> execute();
+	$userInfos = $query -> fetch();
+
+	if ($userInfos){
+		
+		//password_verify est compatible >= PHP 5.5
+		if (password_verify($password,$userInfos['password'])) {
+			
+			//On stocke le user en session mais on retire le password avant
+			unset($userInfos['password']);
+			$_SESSION['user']=$userInfos;
+			header('Location: catalogue.php');
+			die();
+		}
+		else{
+			$errors['password']="Password invalid";
+		}
+	} else {
+		$errors['email']="user with email not find";
+	}
+	
+	$_SESSION['loginErrors'] = $errors;
+	header("Location: connexion.php");
+	die();
+
+}
+
+ ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -13,8 +58,10 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
             body {
+
                 
                 padding-bottom: 20px;
+
             }
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -42,7 +89,26 @@
       </div>
     </div>
     <div class="formConnexion col-md-4 col-md-offset-4">
-	    	<form>
+    	<?php if(isset($_SESSION['loginErrors'])): ?>
+    		<?php if(isset($_SESSION['loginErrors']['email'])) : ?> 
+    			<div class="alert alert-danger"> 
+    				<?php echo ($_SESSION['loginErrors']['email']);?> 
+    				<?php unset($_SESSION['loginErrors']['email']) ?> 
+    			</div>
+    		<?php endif;?>
+
+    		<?php if(isset($_SESSION['loginErrors']['password'])) : ?> 
+    			<div class="alert alert-danger"> 
+    				<?php echo ($_SESSION['loginErrors']['password']);?> 
+    				<?php unset($_SESSION['loginErrors']['password']) ?> 
+    			</div>
+    		<?php endif;?>
+
+    		<!-- il faut supprimer les erreurs une fois affichées sinon elles vont rester -->
+    		<?php		unset($_SESSION['loginErrors']);?>
+    	<?php endif; ?>
+
+	    	<form method="POST" action="#">
 			  <div class="form-group">
 			    <label for="exampleInputEmail1">Email</label>
 			    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
@@ -56,7 +122,7 @@
 			</form>
 			
 			<footer>
-	        	<p>&copy; Mohand, Nadia , Bilel</p>
+	        	<p>&copy; Mohand, Nadia , Bilel, Cesario</p>
 	      	</footer>
     	</div>
 	
