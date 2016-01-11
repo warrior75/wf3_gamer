@@ -87,38 +87,45 @@ if (isset($_POST['action'])) {
       </div>
     </div>
     <div class="formConnexion col-md-4 col-md-offset-4">
-    	<?php if(isset($_SESSION['loginErrors'])): ?>
-    		<?php if(isset($_SESSION['loginErrors']['email'])) : ?> 
-    			<div class="alert alert-danger"> 
-    				<?php echo ($_SESSION['loginErrors']['email']);?> 
-    				<?php unset($_SESSION['loginErrors']['email']) ?> 
-    			</div>
-    		<?php endif;?>
+    		
 
-    		<?php if(isset($_SESSION['loginErrors']['password'])) : ?> 
-    			<div class="alert alert-danger"> 
-    				<?php echo ($_SESSION['loginErrors']['password']);?> 
-    				<?php unset($_SESSION['loginErrors']['password']) ?> 
-    			</div>
-    		<?php endif;?>
+    	
 
-    		<!-- il faut supprimer les erreurs une fois affichées sinon elles vont rester -->
-    		<?php		unset($_SESSION['loginErrors']);?>
-    	<?php endif; ?>
+    	
 
 	    	<form method="POST" action="#">
 			  <div class="form-group">
 			    <label for="exampleInputEmail1">Email</label>
 			    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
 			  </div>
+			  <?php if(isset($_SESSION['loginErrors'])): ?>
+				  <?php if(isset($_SESSION['loginErrors']['email'])) : ?> 
+	    			<span id="helpBlock2" class="help-block"> 
+	    				<?php echo ($_SESSION['loginErrors']['email']);?> 
+	    				<?php unset($_SESSION['loginErrors']['email']); ?> 
+	    			</span>
+		    		<?php endif;?>
+		    		<?php unset($_SESSION['loginErrors']);?>
+    		<?php endif; ?>
 			  <div class="form-group">
 			    <label for="exampleInputPassword1">Password</label>
 			    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 			  </div>
-			  
+
+
+			<?php if(isset($_SESSION['loginErrors'])): ?>
+    		<?php if(isset($_SESSION['loginErrors']['password'])) : ?> 
+    			<span id="helpBlock2" class="help-block">
+    				<?php echo ($_SESSION['loginErrors']['password']);?> 
+    				<?php unset($_SESSION['loginErrors']['password']); ?> 
+    			</span>
+    		<?php endif;?>
+			  	<!-- il faut supprimer les erreurs une fois affichées sinon elles vont rester -->
+    		<?php		unset($_SESSION['loginErrors']);?>
+    		<?php endif; ?>
 			  <button type="submit" name="action" class="btn btn-primary">Valider</button>
                <div class="form-group">
-                            <p class="help-block"><a href="forgotPassword.php">Mot de passe ?</a></p>
+                    <p class="help-block"><a href="forgotPassword.php">Mot de passe oublié?</a></p>
                 </div>
 			</form>
 			
