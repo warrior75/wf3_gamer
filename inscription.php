@@ -44,28 +44,28 @@
     <div class="formInscription col-md-4 col-md-offset-4">
             <form>
               <div class="form-group">
-                <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email" name="">
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="text" class="form-control" id="password" placeholder="Password" name="">
+                <input type="text" class="form-control" id="password" placeholder="Password" name="password">
               </div>
               <div class="form-group">
-                <label for="confirmPassword1">Confirmer mot de passe</label>
-                <input type="text" class="form-control" id="confirmPassword1" placeholder="confirm Password" name="">
+                <label for="confirmPassword">Confirmer mot de passe</label>
+                <input type="text" class="form-control" id="confirmPassword" placeholder="confirm Password" name="confirmPassword">
               </div>
               <div class="form-group">
                 <label for="lastname">Nom</label>
-                <input type="text" class="form-control" id="lastname" placeholder="lastname" name="">
+                <input type="text" class="form-control" id="lastname" placeholder="lastname" name="lastname">
               </div>
               <div class="form-group">
                 <label for="firstname">Prénom</label>
-                <input type="text" class="form-control" id="firstname" placeholder="firstname" name="">
+                <input type="text" class="form-control" id="firstname" placeholder="firstname" name="firstname">
               </div>
               <div class="form-group">
                 <label for="adresse">Adresse</label>
-                <input type="text" class="form-control" id="adresse" placeholder="address" name="">
+                <input type="text" class="form-control" id="adresse" placeholder="address" name="adresse">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Code Postal</label>
