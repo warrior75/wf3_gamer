@@ -118,7 +118,7 @@ if (isset($_POST['action'])) {
 			  
 			  <button type="submit" name="action" class="btn btn-primary">Valider</button>
                <div class="form-group">
-                            <p class="help-block"><a href="forgotPassword.php">Mot de passe ?</a></p>
+                    <p class="help-block"><a href="forgotPassword.php">Mot de passe oublié?</a></p>
                 </div>
 			</form>
 			
