@@ -13,10 +13,8 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
             body {
-
-             padding-bottom: 20px;
-
-
+               
+                padding-bottom: 20px;
             }
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -52,15 +50,10 @@
               <div class="form-group">
 
                 <label for="password">Password</label>
-                <input type="text" class="form-control" id="password" placeholder="Password" name="password">
-              </div>
-              <div class="form-group">
-                <label for="confirmPassword">Confirmer mot de passe</label>
-                <input type="text" class="form-control" id="confirmPassword" placeholder="confirm Password" name="confirmPassword">
 
-                <input type="password" class="form-control" id="password" placeholder="Password" name="">
-
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
               </div>
+
               <div class="form-group">
                 <label for="confirmPassword1">Confirmer mot de passe</label>
                 <input type="password" class="form-control" id="confirmPassword1" placeholder="confirm Password" name="">
