@@ -178,9 +178,6 @@ $errors = [];
     </div>
     <div class="formInscription col-md-4 col-md-offset-4">
 
-    <?php if (isset($_POST['action'])): ?>
-      <?php print_r($errors); ?>
-    <?php endif; ?>
             <form method="POST" action="#">
               <div class="form-group <?php if(isset($errors['email'])) { echo "has-error" ;}?>">
                 <label for="email">Email</label>

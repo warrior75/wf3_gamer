@@ -30,10 +30,10 @@ if (isset($_POST['action'])) {
 			die();
 		}
 		else{
-			$errors['password']="Password invalid";
+			$errors['password']="Mot de passe invalide";
 		}
 	} else {
-		$errors['email']="user with email not find";
+		$errors['email']="Aucun utilisateur avec cet adresse mail";
 	}
 	
 	$_SESSION['loginErrors'] = $errors;
@@ -117,6 +117,9 @@ if (isset($_POST['action'])) {
 			  </div>
 			  
 			  <button type="submit" name="action" class="btn btn-primary">Valider</button>
+               <div class="form-group">
+                            <p class="help-block"><a href="forgotPassword.php">Mot de passe ?</a></p>
+                </div>
 			</form>
 			
 			<footer>
