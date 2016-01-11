@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="formInscription col-md-4 col-md-offset-4">
-            <form>
+            <form method="POST" action="">
               <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="Email" name="">
@@ -51,7 +51,7 @@
 
                 <label for="password">Password</label>
 
-                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                <input type="password " class="form-control" id="password" placeholder="Password" name="password">
               </div>
 
               <div class="form-group">
@@ -72,16 +72,16 @@
                 <input type="text" class="form-control" id="adresse" placeholder="address" name="adresse">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Code Postal</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="">
+                <label for="codePostal">Code Postal</label>
+                <input type="text" class="form-control" id="codePostal" placeholder="codePostal" name="">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Ville</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="">
+                <label for="ville">Ville</label>
+                <input type="text" class="form-control" id="ville" placeholder="ville" name="">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Téléphone</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="">
+                <label for="telephone">Téléphone</label>
+                <input type="text" class="form-control" id="telephone" placeholder="telephone" name="">
               </div>
               
               <button type="submit" name="action" class="btn btn-primary">Valider</button>
