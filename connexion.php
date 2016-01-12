@@ -95,8 +95,8 @@ if (isset($_POST['action'])) {
 
 	    	<form method="POST" action="#">
 			  <div class="form-group">
-			    <label for="exampleInputEmail1">Email</label>
-			    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+			    <label for="email">Email</label>
+			    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
 			  </div>
 			  <?php if(isset($_SESSION['loginErrors'])): ?>
 				  <?php if(isset($_SESSION['loginErrors']['email'])) : ?> 
@@ -108,8 +108,8 @@ if (isset($_POST['action'])) {
 		    		<?php unset($_SESSION['loginErrors']);?>
     		<?php endif; ?>
 			  <div class="form-group">
-			    <label for="exampleInputPassword1">Password</label>
-			    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+			    <label for="password">Mot de passe</label>
+			    <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe">
 			  </div>
 
 
