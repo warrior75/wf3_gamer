@@ -2,6 +2,11 @@
 session_start(); 
 require(__DIR__.'/config/db.php'); 
 
+if(isset($_SESSION['gamers'])){
+	header('Location: catalogue.php');
+	die();
+}
+
 // Vérifier que le button submit a été cliqué
 
 if (isset($_POST['action'])) {

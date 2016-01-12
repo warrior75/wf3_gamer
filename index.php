@@ -1,6 +1,15 @@
+<?php 
+session_start(); 
+
+if(isset($_SESSION['gamers'])){
+  header('Location: catalogue.php');
+  die();
+}
+
+?>
 
 
-<!doctype html>
+<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
@@ -63,12 +72,14 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container" id="header">
-        <?php if (isset($_SESSION['loginErrors']['login'])) :?>
+
+   <?php if (isset($_SESSION['message'])) :?>
             <div class="alert alert-info" >
-                <?php echo $_SESSION['loginErrors']['login']; ?>
-                <?php unset($_SESSION['loginErrors']['login']); ?>
+                <?php echo $_SESSION['message']; ?>
+                <?php unset($_SESSION['message']); ?>
             </div>
         <?php endif; ?>
+
         <div id="imgLogo">
           <img src="img/logo.png">  
         </div>

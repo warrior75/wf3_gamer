@@ -5,6 +5,11 @@ session_start();
 require(__DIR__.'/config/db.php');
 require(__DIR__.'/functions.php');
 
+if(isset($_SESSION['gamers'])){
+  header('Location: catalogue.php');
+  die();
+}
+
 if(isset($_POST['action'])){
 
 
@@ -136,7 +141,7 @@ $errors = [];
                 unset($resultUser['password']);
                 $_SESSION['gamers'] = $resultUser;
 
-                // On redirige l'utilisateur vers la page protégé profile.php
+                // On redirige l'utilisateur vers la page protégé catalogue.php
                 header("Location: catalogue.php");
                 die();
               }

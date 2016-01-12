@@ -1,15 +1,12 @@
 <?php
     session_start();
     require_once(__DIR__.'/config/db.php');
+    require(__DIR__.'/functions.php');
     $pagesGames= 0;
     $nbJeux= 0;
     
-    if (!isset($_SESSION['gamers'])) {
-        $errors['login']="Vous devez vous connecter";
-        $_SESSION['loginErrors'] = $errors;
-        header('Location: index.php');
-        die();
-    }
+    checkLoggedIn();
+
             if(!isset($_POST['action'])) {
                 // Afficher le catalogue entier
                 $query = $pdo->query('SELECT count(id) as total  FROM games');
@@ -55,7 +52,7 @@
             
     
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
@@ -99,9 +96,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="inscription.php">Inscription</a></li>
-                <li><a href="connexion.php">Connexion</a></li>
+              <ul class="nav navbar-nav"> 
                 <li><a href="admin.php">Admin</a></li>
               </ul>
               <form class="navbar-form navbar-left" role="search">
