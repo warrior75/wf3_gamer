@@ -34,6 +34,7 @@ if(isset($_SESSION['gamers'])){
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
+    <main>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -115,5 +116,6 @@ if(isset($_SESSION['gamers'])){
         <script src="js/vendor/bootstrap.min.js"></script>
 
         <script src="js/main.js"></script>
+      </main>
     </body>
 </html>
