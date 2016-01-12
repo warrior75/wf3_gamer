@@ -34,7 +34,6 @@
             } else {
 
                 $search = $_POST['search'];
-                print_r($_POST);
                 $plateform_id = $_POST['plateform'];
                 if ($plateform_id != 0) {                         
                     $query = $pdo -> prepare('SELECT * FROM games WHERE title LIKE :title AND plateform_id =:plateform_id');
