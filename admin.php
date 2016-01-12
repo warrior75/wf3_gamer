@@ -18,18 +18,17 @@
 	}
 
 	// compter le nbr. de users en bdd
-	$query = $pdo('');
-	$resultCount = $query->bindValue
-
-
+	$query = $pdo->query('SELECT count(id) as total FROM gamers');
+	$resultCount = $query->fetch();
+	$totalUser = $resultCount['total'];// affiche dans le page admin
 
 ?>
 
 Cette session est visible que pour les administrateurs
 
     <style type="text/css">
-      html, body { height: 100%; margin: 0; padding: 0; }
-      #map { height: 100%; }
+     
+      #map { height: 200px; }
     </style>
   </head>
   <body>
@@ -38,7 +37,7 @@ Cette session est visible que pour les administrateurs
 
 var map;
 
-var myLatLng = lat lng 
+var myLatLng = {lat: 48.8909964, lng: 2.2345892};
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -47,9 +46,10 @@ function initMap() {
     zoom: 12
   });
 
-  var marker = new google.maps.Marker({
-	
-
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'hello'
 	});
 }
 
@@ -57,7 +57,7 @@ function initMap() {
 
     </script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFHyhOE1lniNGNo0yrkthO-wEUp4OOzM&callback=initMap">
     </script>
   </body>
 </html>
