@@ -108,7 +108,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Louer</a></li>
                 <li><a href="#" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i> <?php echo $nbJeux; ?> </a></li>           
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="logout.php">Déconnexion</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
