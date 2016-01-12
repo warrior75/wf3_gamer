@@ -21,7 +21,7 @@
 	$query = $pdo->query('SELECT count(id) as total FROM gamers');
 	$resultCount = $query->fetch();
 	$totalUser = $resultCount['total'];// affiche dans le page admin
-	echo $totalUser.' utilisateur(s) connecté(s)'.'<br>';
+	echo $totalUser.'inscrits'.'<br>';
 ?>
 
 Cette session est visible que pour les administrateurs
