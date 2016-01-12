@@ -36,9 +36,8 @@
                 $search = $_POST['search'];
                 $plateform_id = $_POST['plateform'];
                 if ($plateform_id != 0) {                         
-                    $query = $pdo -> prepare('SELECT * FROM games WHERE title LIKE :title AND plateform_id =:plateform_id');
-                    $query -> bindValue(':title','%'.$search.'%',PDO::PARAM_STR);
-                    $query -> bindValue(':plateform_id',$plateform_id,PDO::PARAM_INT);
+                    $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
+                                              INNER JOIN plateforme ON plateform_id = plateforme.id');
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
                 } else {
@@ -161,9 +160,10 @@
             
             <!-- 2. Dynamiser avec php -->
                 <?php foreach($resultGame as $key => $game): ?>
-            <div class="fiche">
-            <img src="<?php echo $game['img']; ?>" height="170" width="120">
-            <h5><?php echo $game['title'] ?></h5>
+                <div class="fiche">
+                <img src="<?php echo $game['img']; ?>" height="170" width="120">
+                <h5>Titre :<?php echo $game['title'] ?></h5>
+                <h5>Plateforme :<?php echo $game['plateforme_name'] ?></h5>
             <!-- <p><?php echo $game['description'] ?></p> -->
             <a href='panier.php?game_id=<?php echo $game['id'];?>&titre=<?php echo urlencode($game['title']);?>&qteJeu=1'><button type="submit" name="action" class="btn btn-success">Louer</button></a>
             </div>
