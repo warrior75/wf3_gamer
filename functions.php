@@ -1,48 +1,49 @@
-<?php
+<?php 
 
 
-// Por enregistrer en bdd : 
-// champ lat: DECIMAL(10,8)
-// champ lat: DECIMAL(11s,8)
-function geocode($address){
+// Pour enregistrer en bdd :
+// champs latitude: DECIMAL(10,8)
+// champs longitude: DECIMAL(11,8)
+function geocode($address) {
 
 	// Url de l'api http://maps.google.com/maps/api/geocode/json?address=
 
-	// encodage de l'adresse pour la soumettre sur l'url par la suite
-
+	// Encodage de l'adresse pour la soumettre sur l'url par la suite
 	$address = urlencode($address);
 
 	// Url de l'api pour geocoder
-	// 'http://maps.google.com/maps/api/geocode/json?address='.$adress
+	// 'http://maps.google.com/maps/api/geocode/json?address='.$address
 	$urlApi = "http://maps.google.com/maps/api/geocode/json?address=$address";
 
 	// Appel à l'Api gmap decode (en GET - réponse en JSON)
-	$responseJson = file_get_contents($urlApi);
+	$responseJson = file_get_contents($urlApi); 
 
-	// Decodage du json pour le transformer en array php associatif
-	$responseArray = json_decode($responseJson, true);
+	// Decodage du json pour le transformer en array php associatif (2eme paramètre à true)
+	$reponseArray = json_decode($responseJson, true);
 
-/*	echo "<pre>";
-	print_r($responseArray);
-	echo "</pre>";*/
+	/*echo '<pre>';
+	print_r($reponseArray);
+	echo '</pre>';*/
 
 	// On prépare un tableau associatif comme réponse de cette fonction
-	$response = [];
+	$reponse = [];
 
-	// Je test le statut de réponse à OK (sinon cela signifie qu'il n'a pas de correspondant)
-	if($responseArray['status'] == 'OK'){
-		$lat = $responseArray['results']['0']['geometry']['location']['lat'];
-		$lng = $responseArray['results']['0']['geometry']['location']['lng'];
+	// Je test le statut de réponse à OK (sinon cela signifie qu'il n'a pas de correspondance) 
+	if($reponseArray['status'] == 'OK') {
+		$lat = $reponseArray['results'][0]['geometry']['location']['lat'];
+		$lng = $reponseArray['results'][0]['geometry']['location']['lng'];
 
-	// Test les valeurs (pas indispensable)
-	if() {
-		$reponse['lat'] = $lat;
-		$reponse['lng'] = $lng;
+		// Test les valeurs (pas indispensable)
+		if($lat && $lng) {
+			$reponse['lat'] = $lat;
+			$reponse['lng'] = $lng;
+		}
 	}
-	}
+
+	return $reponse;
 
 }
 
-echo geocode('136, avenue pablo picasso 92000 nanterre');
+/*print_r(geocode('136, avenue pablo picasso 92000 nanterre'));*/
 
 ?>
