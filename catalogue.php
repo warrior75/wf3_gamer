@@ -3,8 +3,10 @@
     require_once(__DIR__.'/config/db.php');
     $pagesGames= 0;
     $nbJeux= 0;
-    print_r($_SESSION['gamers']);
+    
     if (!isset($_SESSION['gamers'])) {
+        $errors['login']="Vous devez vous connecter";
+        $_SESSION['loginErrors'] = $errors;
         header('Location: index.php');
         die();
     }
