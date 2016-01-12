@@ -142,7 +142,7 @@ if(isset($_POST['action'])) {
 				</div>
 			<?php endif; ?>
 
-			<div class="col-md-3">
+			<div class="formConnexion col-md-4 col-md-offset-4">
 
 				<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 					<div class="form-group">
