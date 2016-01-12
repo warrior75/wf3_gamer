@@ -113,8 +113,8 @@
                                  
                                     <tr class="success">
                                       <td><?php echo $_SESSION['panier']['libelleJeu']; ?></td>
-                                      <td><?php echo $_SESSION['panier']['prixJeu']; ?></td>
-                                      <td><?php echo MontantGlobal();?></td>
+                                      <td><?php echo $_SESSION['panier']['prixJeu']; ?>€ </td>
+                                      <td><?php echo MontantGlobal();?>€</td>
                                     </tr>
                                 
                                   </tbody>
