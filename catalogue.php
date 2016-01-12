@@ -102,6 +102,7 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="inscription.php">Inscription</a></li>
                 <li><a href="connexion.php">Connexion</a></li>
+                <li><a href="admin.php">Admin</a></li>
               </ul>
               <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">

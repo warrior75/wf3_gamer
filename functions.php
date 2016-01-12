@@ -1,5 +1,19 @@
 <?php 
 
+// Vérification de la session users
+	function checkLoggedIn() {
+		// Si on a oublié d'appeler session_start()
+		if(!isset($_SESSION)) {
+			session_start();
+		}
+
+		if(empty($_SESSION['gamers'])) {
+			$_SESSION['message'] = "Vous devez vous connecter.";
+			
+			header("Location: index.php");
+			die();
+		}
+	}
 
 // Pour enregistrer en bdd :
 // champs latitude: DECIMAL(10,8)
