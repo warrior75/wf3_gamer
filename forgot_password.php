@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -17,10 +18,10 @@ if(isset($_POST['action'])) {
 
 		//4. Check du champs email (pas vide, format email et inférieur à 60 caractères)
 	if(empty($email) || (filter_var($email, FILTER_VALIDATE_EMAIL)) === false) {
-		$errors['email'] = "Wrong email.";
+		$errors['email'] = "Email incorrect";
 	}
 	elseif (strlen($email) > 60) {
-		$errors['email'] = "Email too long";
+		$errors['email'] = "Email trop long";
 	}
 
 		// S'il n'y a pas d'erreurs sur l'email
@@ -47,7 +48,7 @@ if(isset($_POST['action'])) {
 			$query->bindValue(':id', $resultUser['id'], PDO::PARAM_INT);
 			$query->execute();
 
-				// Equivalent à http://localhost/php/38/wf3_session/resetPassword.php?token=*****&email=*******
+				// Equivalent à http://localhost/php/38/wf3_gamer/resetPassword.php?token=*****&email=*******
 			$resetLink = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/resetPassword.php?token='.$token.'&email='.$email;
 				//mail('edwin.polycarpe@gmail.com', 'Forgot Password', $resetLink);
 
@@ -55,15 +56,14 @@ if(isset($_POST['action'])) {
 			$mail = new PHPMailer;
 
 				// Paramètre envoi e-mail
-			$mail->setFrom('no-reply@wf3.com', 'WF3');
-				$mail->addAddress($email); // 
-				$mail->addAddress('edwin.polycarpe@gmail.com'); // A retirer en prod 
+			$mail->setFrom('meslem.bellal@gmail.com', 'Admin');
+				$mail->addAddress($email); //  
 
 				// Format HTML
 				$mail->isHTML(true);
 
 				// Sujet de l'email
-				$mail->Subject = 'Forgot your password ?';
+				$mail->Subject = 'Mot de passe oublié ?';
 
 				// Message de l'email
 				$mail->Body    = '<p>Vous avez oublié votre mot de passe ? <br />
@@ -73,16 +73,16 @@ if(isset($_POST['action'])) {
 				// Envoi de l'email
 			if($mail->send()) {
 					// Echo de resetLink car l'envoie de mail ne fonctionne pas :(
-				$notifications['email'] = "Email sent, check your email box ! $resetLink";
+				$notifications['email'] = "Un email vous a été envoyé vérifiez votre boite mail ! $resetLink";
 			}
 			else {
-				$errors['email'] = "Application error. Email doesn't sent. $resetLink";
+				$errors['email'] = "L'email n'a pas pu être envoyé. $resetLink";
 			}
 
 
 		}
 		else {
-			$errors['user'] = "User not found.";	
+			$errors['user'] = "l'utilisateur n'existe pas";	
 		}
 	}
 

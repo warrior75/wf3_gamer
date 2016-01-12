@@ -34,6 +34,8 @@ $errors = [];
   // Check le champs email
   if(empty($email) || filter_var($email, FILTER_VALIDATE_EMAIL) === false){
     $errors['email'] = 'L\'adresse n\'est pas au bon format';
+  }elseif (strlen($email) > 60) {
+    $errors['email'] = "l'email est troo long";
   }
   else {
       // Je vérifie que l'email existe pas déjà dans ma bdd
