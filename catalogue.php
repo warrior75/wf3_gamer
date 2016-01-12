@@ -34,7 +34,6 @@
             } else {
 
                 $search = $_POST['search'];
-                print_r($_POST);
                 $plateform_id = $_POST['plateform'];
                 if ($plateform_id != 0) {                         
                     $query = $pdo -> prepare('SELECT * FROM games WHERE title LIKE :title AND plateform_id =:plateform_id');
@@ -107,7 +106,7 @@
               </form>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Louer</a></li>
-                <li><a href="#" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i> <?php echo $nbJeux; ?> </a></li>           
+                <li><a href="panier.php" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i> <?php echo $nbJeux; ?> </a></li>           
                 <li><a href="logout.php">Déconnexion</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
@@ -162,12 +161,12 @@
             
             <!-- 2. Dynamiser avec php -->
                 <?php foreach($resultGame as $key => $game): ?>
-                    <div class="fiche">
-                    <img src="<?php echo $game['img']; ?>" height="170" width="120">
-                    <h5><?php echo $game['title'] ?></h5>
-                    <!-- <p><?php echo $game['description'] ?></p> -->
-                    <a href="#"><button type="submit" name="action" class="btn btn-success">Louer</button></a>
-                    </div>
+            <div class="fiche">
+            <img src="<?php echo $game['img']; ?>" height="170" width="120">
+            <h5><?php echo $game['title'] ?></h5>
+            <!-- <p><?php echo $game['description'] ?></p> -->
+            <a href='panier.php?game_id=<?php echo $game['id'];?>&titre=<?php echo urlencode($game['title']);?>&qteJeu=1'><button type="submit" name="action" class="btn btn-success">Louer</button></a>
+            </div>
                 <?php endforeach; ?>
             <?php else : ?>
                 <div class="alert alert-info">
