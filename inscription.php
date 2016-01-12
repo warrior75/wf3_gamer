@@ -3,6 +3,7 @@
 session_start();
 
 require(__DIR__.'/config/db.php');
+require(__DIR__.'/functions.php');
 
 if(isset($_POST['action'])){
 
@@ -73,6 +74,9 @@ $errors = [];
         $errors['firstname'] = "Le prénom ne doit contenir que des lettres ";
       }
 
+      if(empty($address)) {
+        $errors['adresse'] = "L'adresse n'est pas conforme";
+      }
       // Vérification du code postal
       if(!ctype_digit($cp) || strlen($cp) != 5 ){
         $errors['cp'] = "Le code postal doit contenir 5 chiffres";
@@ -86,13 +90,13 @@ $errors = [];
       if(!preg_match('/^0[0-9]{9}/',$tel)){
         $errors['tel'] = "Le numéro de téléphone n'est pas correct";
       }
-
+     
 
       // S'il n'y a pas d'erreurs, on enregistre l'utilisateur dans la base de données
       if( empty($errors)){
 
            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-           $query = $pdo->prepare('INSERT INTO gamers(email,password,firstname,lastname,adresse,zipcode,town,phone,created_at,role) VALUES(:email,:password,:firstname,:lastname,:adresse,:zipcode,:town,:phone,NOW(),"member")');
+           $query = $pdo->prepare('INSERT INTO gamers(email,password,firstname,lastname,adresse,zipcode,town,phone,created_at,role,lat,lng) VALUES(:email,:password,:firstname,:lastname,:adresse,:zipcode,:town,:phone,NOW(),"member",:lat,:lng)');
            $query->bindValue(':email',$email,PDO::PARAM_STR);
            $query->bindValue(':password',$hashedPassword,PDO::PARAM_STR);
            $query->bindValue(':firstname',$firstname,PDO::PARAM_STR);
@@ -101,10 +105,23 @@ $errors = [];
            $query->bindValue(':zipcode',$cp,PDO::PARAM_INT);
            $query->bindValue(':town',$town,PDO::PARAM_STR);
            $query->bindValue(':phone',$tel,PDO::PARAM_INT);
-           $query->execute();
+         
 
-           // Geocode de l'adresse
+      // Geocode de l'adresse
+           $geocodeAddress = geocode($address.' '.$cp.' '.$town);
           
+      
+           if (!empty($geocodeAddress)) {
+             $query->bindValue(':lat',$geocodeAddress['lat'], PDO::PARAM_STR);
+             $query->bindValue(':lng',$geocodeAddress['lng'], PDO::PARAM_STR);
+           }
+           else {
+            $query->bindValue(':lat', NULL, PDO::PARAM_STR);
+            $query->bindValue(':lng', NULL, PDO::PARAM_STR);
+
+           }
+
+           $query->execute();      
 
               // L'utilisateur a t-il été bien inséré en bdd ?
               if($query->rowCount() > 0) {
