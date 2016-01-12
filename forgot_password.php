@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -17,10 +18,10 @@ if(isset($_POST['action'])) {
 
 		//4. Check du champs email (pas vide, format email et inférieur à 60 caractères)
 	if(empty($email) || (filter_var($email, FILTER_VALIDATE_EMAIL)) === false) {
-		$errors['email'] = "Wrong email.";
+		$errors['email'] = "Email incorrect";
 	}
 	elseif (strlen($email) > 60) {
-		$errors['email'] = "Email too long";
+		$errors['email'] = "Email trop long";
 	}
 
 		// S'il n'y a pas d'erreurs sur l'email
@@ -47,42 +48,14 @@ if(isset($_POST['action'])) {
 			$query->bindValue(':id', $resultUser['id'], PDO::PARAM_INT);
 			$query->execute();
 
-				// Equivalent à http://localhost/php/38/wf3_session/resetPassword.php?token=*****&email=*******
+				// Equivalent à http://localhost/php/38/wf3_gamer/resetPassword.php?token=*****&email=*******
 			$resetLink = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/resetPassword.php?token='.$token.'&email='.$email;
-				//mail('edwin.polycarpe@gmail.com', 'Forgot Password', $resetLink);
+			// mail($email, 'Forgot Password', $resetLink);
 
-				// Instance de phpmailer
-			$mail = new PHPMailer;
-
-				// Paramètre envoi e-mail
-			$mail->setFrom('no-reply@wf3.com', 'WF3');
-				$mail->addAddress($email); // 
-				$mail->addAddress('edwin.polycarpe@gmail.com'); // A retirer en prod 
-
-				// Format HTML
-				$mail->isHTML(true);
-
-				// Sujet de l'email
-				$mail->Subject = 'Forgot your password ?';
-
-				// Message de l'email
-				$mail->Body    = '<p>Vous avez oublié votre mot de passe ? <br />
-				<a href="'.$resetLink.'">Cliquez ici pour créer un nouveau mot de passe</a>
-			</p>';
-
-				// Envoi de l'email
-			if($mail->send()) {
-					// Echo de resetLink car l'envoie de mail ne fonctionne pas :(
-				$notifications['email'] = "Email sent, check your email box ! $resetLink";
-			}
-			else {
-				$errors['email'] = "Application error. Email doesn't sent. $resetLink";
-			}
-
-
+			$notifications['link'] = "$resetLink";
 		}
 		else {
-			$errors['user'] = "User not found.";	
+			$errors['gamers'] = "L'utilisateur n'existe pas";	
 		}
 	}
 
@@ -114,7 +87,6 @@ if(isset($_POST['action'])) {
 					</div>
 
 					<h1 id="gameloc">Mot de passe oublié?</h1>
-					
 
 				</div>
 			</div>
@@ -135,12 +107,14 @@ if(isset($_POST['action'])) {
 			<?php endif; ?>
 
 			<?php if(!empty($notifications)): ?>
-				<div class="alert alert-danger">
+				<div class="bg-info">
 					<?php foreach ($notifications as $keyNotif => $notif) : ?>
 						<p><?php echo $notif; ?></p>
 					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
+
+
 
 			<div class="formConnexion col-md-4 col-md-offset-4">
 
@@ -156,4 +130,4 @@ if(isset($_POST['action'])) {
 		</div>
 	</div>
 </body>
-</html>
+</html>+
