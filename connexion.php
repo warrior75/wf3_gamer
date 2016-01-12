@@ -13,8 +13,8 @@ if (isset($_POST['action'])) {
 
 	// 1. récupération de l'utilisateur dans la bdd grâce à son email
 
-	$query = $pdo -> prepare('SELECT email,password FROM gamers WHERE email = :email');
-	$query -> bindValue('email',$email,PDO::PARAM_STR);
+	$query = $pdo -> prepare('SELECT * FROM gamers WHERE email = :email');
+	$query -> bindValue(':email',$email,PDO::PARAM_STR);
 	$query -> execute();
 	$userInfos = $query -> fetch();
 
@@ -31,14 +31,13 @@ if (isset($_POST['action'])) {
 		}
 		else{
 			$errors['password']="Mot de passe invalide";
+			
 		}
 	} else {
 		$errors['email']="Aucun utilisateur avec cet adresse mail";
 	}
 	
-	$_SESSION['loginErrors'] = $errors;
-	header("Location:connexion.php");
-	die();
+
 
 }
 
@@ -118,41 +117,30 @@ if (isset($_POST['action'])) {
     </div>
     <div class="formConnexion col-md-4 col-md-offset-4">
     		
+	    	<form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
-    	
-
-    	
-
-	    	<form method="POST" action="#">
 			  <div class="form-group">
 			    <label for="email">Email</label>
 			    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
 			  </div>
-			  <?php if(isset($_SESSION['loginErrors'])): ?>
-				  <?php if(isset($_SESSION['loginErrors']['email'])) : ?> 
+
+			 	<?php if(isset($errors['email'])): ?>
 	    			<span id="helpBlock2" class="help-block"> 
-	    				<?php echo ($_SESSION['loginErrors']['email']);?> 
-	    				<?php unset($_SESSION['loginErrors']['email']); ?> 
+	    				<?php echo $errors['email'] ;?> 
 	    			</span>
-		    		<?php endif;?>
-		    		<?php unset($_SESSION['loginErrors']);?>
-    		<?php endif; ?>
+		    	<?php endif;?>
+
 			  <div class="form-group">
 			    <label for="password">Mot de passe</label>
 			    <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe">
 			  </div>
 
-
-			<?php if(isset($_SESSION['loginErrors'])): ?>
-    		<?php if(isset($_SESSION['loginErrors']['password'])) : ?> 
+    		<?php if(isset($errors['password'])) : ?> 
     			<span id="helpBlock2" class="help-block">
-    				<?php echo ($_SESSION['loginErrors']['password']);?> 
-    				<?php unset($_SESSION['loginErrors']['password']); ?> 
+    				<?php echo ($errors['password']);?> 
     			</span>
     		<?php endif;?>
-			  	<!-- il faut supprimer les erreurs une fois affichées sinon elles vont rester -->
-    		<?php		unset($_SESSION['loginErrors']);?>
-    		<?php endif; ?>
+  	
 			  <button type="submit" name="action" class="btn btn-primary">Valider</button>
                <div class="form-group">
                     <p class="help-block"><a href="forgotPassword.php">Mot de passe oublié?</a></p>
