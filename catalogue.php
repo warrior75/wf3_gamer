@@ -161,12 +161,12 @@
             
             <!-- 2. Dynamiser avec php -->
                 <?php foreach($resultGame as $key => $game): ?>
-                    <div class="fiche">
-                    <img src="<?php echo $game['img']; ?>" height="170" width="120">
-                    <h5><?php echo $game['title'] ?></h5>
-                    <!-- <p><?php echo $game['description'] ?></p> -->
-                    <a href='panier.php?game_id="<?php echo $game['id'];?>"&titre="<?php echo $game['title'];?>"&qteJeu=1'><button type="submit" name="action" class="btn btn-success">Louer</button></a>
-                    </div>
+            <div class="fiche">
+            <img src="<?php echo $game['img']; ?>" height="170" width="120">
+            <h5><?php echo $game['title'] ?></h5>
+            <!-- <p><?php echo $game['description'] ?></p> -->
+            <a href='panier.php?game_id=<?php echo $game['id'];?>&titre=<?php echo urlencode($game['title']);?>&qteJeu=1'><button type="submit" name="action" class="btn btn-success">Louer</button></a>
+            </div>
                 <?php endforeach; ?>
             <?php else : ?>
                 <div class="alert alert-info">
