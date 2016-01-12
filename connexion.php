@@ -25,7 +25,7 @@ if (isset($_POST['action'])) {
 			
 			//On stocke le user en session mais on retire le password avant
 			unset($userInfos['password']);
-			$_SESSION['user']=$userInfos;
+			$_SESSION['gamers']=$userInfos;
 			header('Location: catalogue.php');
 			die();
 		}
