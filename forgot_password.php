@@ -50,39 +50,12 @@ if(isset($_POST['action'])) {
 
 				// Equivalent à http://localhost/php/38/wf3_gamer/resetPassword.php?token=*****&email=*******
 			$resetLink = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/resetPassword.php?token='.$token.'&email='.$email;
-				//mail('edwin.polycarpe@gmail.com', 'Forgot Password', $resetLink);
+			// mail($email, 'Forgot Password', $resetLink);
 
-				// Instance de phpmailer
-			$mail = new PHPMailer;
-
-				// Paramètre envoi e-mail
-			$mail->setFrom('meslem.bellal@gmail.com', 'Admin');
-				$mail->addAddress($email); //  
-
-				// Format HTML
-				$mail->isHTML(true);
-
-				// Sujet de l'email
-				$mail->Subject = 'Mot de passe oublié ?';
-
-				// Message de l'email
-				$mail->Body    = '<p>Vous avez oublié votre mot de passe ? <br />
-				<a href="'.$resetLink.'">Cliquez ici pour créer un nouveau mot de passe</a>
-			</p>';
-
-				// Envoi de l'email
-			if($mail->send()) {
-					// Echo de resetLink car l'envoie de mail ne fonctionne pas :(
-				$notifications['email'] = "Un email vous a été envoyé vérifiez votre boite mail ! $resetLink";
-			}
-			else {
-				$errors['email'] = "L'email n'a pas pu être envoyé. $resetLink";
-			}
-
-
+			$notifications['link'] = "$resetLink";
 		}
 		else {
-			$errors['user'] = "l'utilisateur n'existe pas";	
+			$errors['gamers'] = "L'utilisateur n'existe pas";	
 		}
 	}
 
@@ -114,7 +87,6 @@ if(isset($_POST['action'])) {
 					</div>
 
 					<h1 id="gameloc">Mot de passe oublié?</h1>
-					
 
 				</div>
 			</div>
@@ -135,12 +107,14 @@ if(isset($_POST['action'])) {
 			<?php endif; ?>
 
 			<?php if(!empty($notifications)): ?>
-				<div class="alert alert-danger">
+				<div class="bg-info">
 					<?php foreach ($notifications as $keyNotif => $notif) : ?>
 						<p><?php echo $notif; ?></p>
 					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
+
+
 
 			<div class="formConnexion col-md-4 col-md-offset-4">
 
@@ -156,4 +130,4 @@ if(isset($_POST['action'])) {
 		</div>
 	</div>
 </body>
-</html>
+</html>+
