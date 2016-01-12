@@ -68,7 +68,7 @@
               </form>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Louer</a></li>
-                <li><a href="panier.php" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i> <?php echo $nbJeux; ?></a></li>         
+                <li><a href="panier.php" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i> <?php echo $qteJeu; ?></a></li>         
                 <li><a href="logout.php">Logout</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
