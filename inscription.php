@@ -117,7 +117,7 @@ $errors = [];
 
                 // On stocke le user en session et on retire le password avant 
                 unset($resultUser['password']);
-                $_SESSION['user'] = $resultUser;
+                $_SESSION['gamers'] = $resultUser;
 
                 // On redirige l'utilisateur vers la page protégé profile.php
                 header("Location: catalogue.php");
