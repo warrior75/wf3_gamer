@@ -13,7 +13,7 @@ if (isset($_POST['action'])) {
 
 	// 1. récupération de l'utilisateur dans la bdd grâce à son email
 
-	$query = $pdo -> prepare('SELECT email,password FROM users WHERE email = :email');
+	$query = $pdo -> prepare('SELECT email,password FROM gamers WHERE email = :email');
 	$query -> bindValue('email',$email,PDO::PARAM_STR);
 	$query -> execute();
 	$userInfos = $query -> fetch();
@@ -25,8 +25,8 @@ if (isset($_POST['action'])) {
 			
 			//On stocke le user en session mais on retire le password avant
 			unset($userInfos['password']);
-			$_SESSION['user']=$userInfos;
-			header('Location:catalogue.php');
+			$_SESSION['gamers']=$userInfos;
+			header('Location: catalogue.php');
 			die();
 		}
 		else{
@@ -71,7 +71,37 @@ if (isset($_POST['action'])) {
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+		<nav class="navbar navbar-inversed">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="index.php">GAMELOC</a>
+		    </div>
 
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li class="active"><a href="inscription.php">Inscription</a></li>
+		        <li><a href="connexion.php">Connexion</a></li>
+		      </ul>
+		      <form class="navbar-form navbar-left" role="search">
+		        <div class="form-group">
+		          <input type="text" class="form-control" placeholder="Search">
+		        </div>
+		        <button type="submit" class="btn btn-primary">Chercher</button>
+		      </form>
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="#">Louer</a></li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
@@ -95,8 +125,8 @@ if (isset($_POST['action'])) {
 
 	    	<form method="POST" action="#">
 			  <div class="form-group">
-			    <label for="exampleInputEmail1">Email</label>
-			    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+			    <label for="email">Email</label>
+			    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
 			  </div>
 			  <?php if(isset($_SESSION['loginErrors'])): ?>
 				  <?php if(isset($_SESSION['loginErrors']['email'])) : ?> 
@@ -108,8 +138,8 @@ if (isset($_POST['action'])) {
 		    		<?php unset($_SESSION['loginErrors']);?>
     		<?php endif; ?>
 			  <div class="form-group">
-			    <label for="exampleInputPassword1">Password</label>
-			    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+			    <label for="password">Mot de passe</label>
+			    <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe">
 			  </div>
 
 
