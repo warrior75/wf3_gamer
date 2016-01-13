@@ -18,10 +18,14 @@ footer {
 
 .fiche {
 	display: inline-block;
-	margin-right: 20px;
-	margin-top: 20px;
+	margin-right: 10px;
+	margin-top: 10px;
 }
 
+nav {
+	padding-bottom: 0px;
+	padding-top: 0px;
+}
 
 
 
