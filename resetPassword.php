@@ -145,6 +145,9 @@ session_start();
         	</div>
       	</div>
     </div>
+   			<footer>
+                <p>&copy; Mohand, Nadia , Bilel</p>
+            </footer>
   </body>
 </html>
 

@@ -141,7 +141,7 @@
                     ?>
                     <div>
                       <footer>
-                          <p>&copy; Mohand, Nadia , Bilel, Cesario</p>
+                          <p>&copy; Mohand, Nadia , Bilel et Cesario</p>
                       </footer>
                   </div>
                </div>

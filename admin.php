@@ -136,7 +136,7 @@ function initMap() {
           <?php endif; ?>
 
     <footer>
-        <p>&copy; Mohand, Nadia , Bilel</p>
+        <p>&copy; Mohand, Nadia , Bilel et Césario</p>
       </footer>
     <!-- /container -->        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
