@@ -20,6 +20,7 @@
       // J'initialise le tableau d'erreurs
 
       $errors = [];
+      $infos = [];
       $is_available = true;
 
       // Transform string to object Datetime
@@ -72,10 +73,10 @@
            $query->execute();
 
            if ($query->rowCount() > 0) {
-             echo "Le jeu est ajouté";
+            $infos['game'] ="Le jeu est ajouté avec succès";
 
            } else {
-            echo "Une erreur est survenue";
+            $errors['game'] = "Une erreur est survenue";
            }
 
 
@@ -120,12 +121,7 @@
           <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+            
               <a class="navbar-brand" href="index.php">GAMELOC</a>
             </div>
 
@@ -166,8 +162,18 @@
 
 
     <div class="formInscription col-md-4 col-md-offset-4">
-
-       
+          
+          <?php if (isset($infos['game'])): ?>
+             <div class="alert alert-info" >
+               <?php echo $infos['game']; ?>
+             </div>
+          <?php endif ?>
+          <?php if (isset($errors['game'])): ?>
+             <div class="alert alert-danger" >
+               <?php echo $errors['game']; ?>
+             </div>
+          <?php endif ?>
+           
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
               <div class="form-group">
                   <label for="platform_id">Plateform :</label>
