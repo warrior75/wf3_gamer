@@ -132,7 +132,7 @@
                 <li><a href="catalogue.php">Catalogue</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Louer</a></li>
+                <li><a href="#"><?php echo "Bonjour ".$_SESSION['gamers']['firstname']." !"; ?></a></li>
                 <li><a href="panier.php" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i></a></li>           
                 <li><a href="logout.php">Déconnexion</a></li>
               </ul>
