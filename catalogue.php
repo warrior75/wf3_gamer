@@ -159,9 +159,11 @@
                 </div>
                 <?php endforeach; ?>
             <?php else : ?>
+              <?php if(isset($_POST['action'])):?>
                 <div class="alert alert-info">
                     <p>Aucun jeu ne correspond à votre recherche</p>
                 </div>
+              <?php endif;?>
             <?php endif; ?>
             <?php if ($pagesGames): ?>
                   
