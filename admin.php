@@ -24,14 +24,19 @@
 	$resultCount = $query->fetch();
 	$totalUser = $resultCount['total'];// affiche dans le page admin
 
-  $query = $pdo->prepare('SELECT * FROM games
-                          WHERE owner_user_id IN (SELECT id FROM gamers
-                          WHERE created_at > SUBDATE(CURRENT_DATE,1));');
+  $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
+                                              INNER JOIN plateforme ON platform_id = plateforme.id 
+                                              WHERE user_id IN (SELECT id FROM gamers
+                                              WHERE created_at > SUBDATE(CURRENT_DATE,1))');
+  // $query->execute();
+  // $name_plateform = $query->fetch();
+
+  // $query = $pdo->prepare('SELECT * FROM games
+  //                         WHERE user_id IN (SELECT id FROM gamers
+  //                         WHERE created_at > SUBDATE(CURRENT_DATE,1))');
   $query->execute();
-  $new_games = $query->fetch();
+  $new_games = $query->fetchAll();
 
-
-	
 ?>
 <!DOCTYPE html>
 <html>
@@ -66,7 +71,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="inscription.php">Inscription</a></li>
-                <li><a href="connexion.php">Connexion</a></li>
+                <li><a href="add_games.php">Ajoutez un jeu !</a></li>
+                <li><a href="catalogue.php">Catalogue</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -113,17 +119,20 @@ function initMap() {
 
 
 <h1>Les derniers jeux ajoutés par les inscrits</h1>
-          <?php if (!empty($new_games)): ?>
+          <?php if(!empty($new_games)): ?>
                 
-            
+          
             <!-- 2. Dynamiser avec php -->
-                <?php foreach($new_games as $key => $game): ?>
+                <?php foreach ($new_games as $game): ?>
+                  
+                
                 <div class="fiche">
-                    <img src="<?php echo $game['img']; ?>" height="170" width="120">
-                    <h5>Titre :<?php echo $game['title'] ?></h5>
-                    <h5>Plateforme :<?php echo $game['plateforme_name'] ?></h5>
-                    <!-- <p><?php echo $game['description'] ?></p> -->
+                    <img src="<?php echo $game['url_img']; ?>" height="170" width="120">
+                    <h5>Titre :<?php echo $game['title']; ?></h5>
+                    <h5>Plateforme : <?php echo $game['plateforme_name']; ?></h5>
+                    <p>description : <?php echo $game['description'] ?></p>
                 </div>
+              <?php endforeach ?>  
           <?php endif; ?>
 
     <footer>

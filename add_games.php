@@ -10,14 +10,17 @@
       // Déclaration de nos variables 
       $platform_id = trim(htmlentities($_POST['platform_id']));
       $title = trim(htmlentities($_POST['title']));
-      $img_url = trim(htmlentities($_POST['img_url']));
+      $url_img = trim(htmlentities($_POST['img_url']));
       $published_time = trim(htmlentities($_POST['published_at']));
       $description = trim(htmlentities($_POST['description']));
       $game_time = trim(htmlentities($_POST['game_time']));
+  
 
+      $owner_user_id = $_SESSION['gamers']['id'];
       // J'initialise le tableau d'erreurs
 
       $errors = [];
+      $is_available = true;
 
       // Transform string to object Datetime
         $published_at = DateTime::createFromFormat('d/m/Y', $published_time);
@@ -57,15 +60,24 @@
 
         if( empty($errors)){
 
-           $query = $pdo->prepare('INSERT INTO games(title,url_img,description,published_at,game_time,is_available,created_at,updated_at,platform_id,owner_user_id) VALUES(:title,:url_img,:description,:published_at,:game_time,:is_available,NOW(),:platform_id,:owner_user_id)');
+           $query = $pdo->prepare('INSERT INTO games(title,url_img,description,published_at,game_time,is_available,created_at,platform_id,user_id) VALUES(:title,:url_img,:description,:published_at,:game_time,:is_available,NOW(),:platform_id,:user_id)');
            $query->bindValue(':title',$title,PDO::PARAM_STR);
            $query->bindValue(':url_img',$url_img,PDO::PARAM_STR);
            $query->bindValue(':description',$description,PDO::PARAM_STR);
-           $query->bindValue(':published_at',$published_at,PDO::PARAM_STR);
+           $query->bindValue(':published_at',$published_time,PDO::PARAM_STR);
            $query->bindValue(':game_time',$game_time,PDO::PARAM_INT);
-           $query->bindValue(':is_available',$is_available,PDO::PARAM_STR);
+           $query->bindValue(':is_available',$is_available,PDO::PARAM_INT);
            $query->bindValue(':platform_id',$platform_id,PDO::PARAM_INT);
-           $query->bindValue(':owner_user_id',$owner_user_id,PDO::PARAM_INT);
+           $query->bindValue(':user_id',$owner_user_id,PDO::PARAM_INT);
+           $query->execute();
+
+           if ($query->rowCount() > 0) {
+             echo "Le jeu est ajouté";
+
+           } else {
+            echo "Une erreur est survenue";
+           }
+
 
       } 
 

@@ -12,19 +12,19 @@
                 // Afficher le catalogue entier
                
                 $search = $_POST['search'];
-                $plateform_id = $_POST['plateform'];
-                if ($plateform_id != 0) {                         
+                $platform_id = $_POST['plateform'];
+                if ($platform_id != 0) {                         
                      $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
-                                              INNER JOIN plateforme ON plateform_id = plateforme.id 
-                                              WHERE title LIKE :title AND plateform_id = :plateform_id ');
+                                              INNER JOIN plateforme ON platform_id = plateforme.id 
+                                              WHERE title LIKE :title AND platform_id = :platform_id ');
 
                     $query -> bindValue(':title','%'.$search.'%',PDO::PARAM_STR);
-                    $query -> bindValue(':plateform_id',$plateform_id,PDO::PARAM_STR);
+                    $query -> bindValue(':platform_id',$platform_id,PDO::PARAM_STR);
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
                 } else {
                     $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
-                                              INNER JOIN plateforme ON plateform_id = plateforme.id 
+                                              INNER JOIN plateforme ON platform_id = plateforme.id 
                                               WHERE title LIKE :title');
                     $query -> bindValue(':title','%'.$search.'%',PDO::PARAM_STR);
                     $query -> execute();
@@ -32,7 +32,7 @@
                 }
             } else {
                      $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
-                                              INNER JOIN plateforme ON plateform_id = plateforme.id ');
+                                              INNER JOIN plateforme ON platform_id = plateforme.id ');
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
             }
@@ -151,7 +151,7 @@
             <!-- 2. Dynamiser avec php -->
                 <?php foreach($resultGame as $key => $game): ?>
                 <div class="fiche">
-                    <img src="<?php echo $game['img']; ?>" height="170" width="120">
+                    <img src="<?php echo $game['url_img']; ?>" height="170" width="120">
                     <h5>Titre :<?php echo $game['title'] ?></h5>
                     <h5>Plateforme :<?php echo $game['plateforme_name'] ?></h5>
                     <!-- <p><?php echo $game['description'] ?></p> -->
