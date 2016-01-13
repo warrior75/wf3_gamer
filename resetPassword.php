@@ -119,30 +119,31 @@ session_start();
 	<div class="container-fluid">
 		<div class="row">
 
-          <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <label for="passwordConfirm">Confirm Password</label>
-              <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm Password">
-            </div>
+			<div class="col-md-4 col-md-offset-4">
+	          <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+	            <div class="form-group">
+	              <label for="password">Password</label>
+	              <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+	            </div>
+	            <div class="form-group">
+	              <label for="passwordConfirm">Confirm Password</label>
+	              <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm Password">
+	            </div>
 
-            <?php if(isset($errors)) : ?> 
-    			<span id="helpBlock2" class="help-block">
-    			<?php foreach($errors as $error):?>
-    				<?php echo $error ; ?>
-    			<?php endforeach; ?>
-    			</span>
-    		<?php endif;?>
-            
-			<input type="hidden" name="token" value="<?php echo $token; ?>" />
-			<input type="hidden" name="email" value="<?php echo $email; ?>" />
-            <button type="submit" name="action" class="btn btn-default">Submit</button>
-          </form>
-        </div>
-      </div>
+	            <?php if(isset($errors)) : ?> 
+	    			<span id="helpBlock2" class="help-block">
+	    			<?php foreach($errors as $error):?>
+	    				<?php echo $error ; ?>
+	    			<?php endforeach; ?>
+	    			</span>
+	    		<?php endif;?>
+	            
+				<input type="hidden" name="token" value="<?php echo $token; ?>" />
+				<input type="hidden" name="email" value="<?php echo $email; ?>" />
+	            <button type="submit" name="action" class="btn btn-default">Submit</button>
+	          </form>
+        	</div>
+      	</div>
     </div>
   </body>
 </html>
