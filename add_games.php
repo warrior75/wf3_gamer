@@ -131,6 +131,8 @@
               </form>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Louer</a></li>
+                <li><a href="panier.php" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i></a></li>           
+                <li><a href="logout.php">Déconnexion</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
