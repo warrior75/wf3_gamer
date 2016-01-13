@@ -23,6 +23,14 @@
 	$query = $pdo->query('SELECT count(id) as total FROM gamers');
 	$resultCount = $query->fetch();
 	$totalUser = $resultCount['total'];// affiche dans le page admin
+
+  $query = $pdo->prepare('SELECT * FROM games
+                          WHERE owner_user_id IN (SELECT id FROM gamers
+                          WHERE created_at > SUBDATE(CURRENT_DATE,1));');
+  $query->execute();
+  $new_games = $query->fetch();
+
+
 	
 ?>
 <!DOCTYPE html>
@@ -105,6 +113,18 @@ function initMap() {
 
 
 <h1>Les derniers jeux ajoutés par les inscrits</h1>
+          <?php if (!empty($new_games)): ?>
+                
+            
+            <!-- 2. Dynamiser avec php -->
+                <?php foreach($new_games as $key => $game): ?>
+                <div class="fiche">
+                    <img src="<?php echo $game['img']; ?>" height="170" width="120">
+                    <h5>Titre :<?php echo $game['title'] ?></h5>
+                    <h5>Plateforme :<?php echo $game['plateforme_name'] ?></h5>
+                    <!-- <p><?php echo $game['description'] ?></p> -->
+                </div>
+          <?php endif; ?>
 
     <footer>
         <p>&copy; Mohand, Nadia , Bilel</p>
