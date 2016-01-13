@@ -38,23 +38,7 @@ if(isset($_SESSION['gamers'])){
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <nav class="navbar navbar-inversed">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <a class="navbar-brand" href="index.php">GAMELOC</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="inscription.php">Inscription</a></li>
-                <li><a href="connexion.php">Connexion</a></li>
-              </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
-    
+   
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container" id="header">
@@ -92,8 +76,8 @@ if(isset($_SESSION['gamers'])){
 
       
 
-      <footer>
-        <p>&copy; Mohand, Nadia , Bilel</p>
+      <footer class="footer">
+        <p>&copy; Mohand, Nadia , Bilel et Césario</p>
       </footer>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

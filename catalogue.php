@@ -85,7 +85,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav"> 
                 <li><a href="add_games.php">Ajoutez un jeu !</a></li>
-                <li><a href="admin.php">Admin</a></li>
+                <li><a href="admin.php"><?php if($_SESSION['gamers']['role'] == 'admin') echo "Admin";?></a></li>
               </ul>
               <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
@@ -94,7 +94,7 @@
                 <button type="submit" class="btn btn-primary">Chercher</button>
               </form>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Louer</a></li>
+                <li><a href="#"><?php echo "Bonjour ".$_SESSION['gamers']['firstname']." !"; ?></a></li>
                 <li><a href="panier.php" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i> <?php echo $nbJeux; ?> </a></li>           
                 <li><a href="logout.php">Déconnexion</a></li>
               </ul>
