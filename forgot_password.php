@@ -4,7 +4,9 @@ session_start();
 
 require(__DIR__.'/config/db.php');
 	// Permet d'inclure la librairie phpmailer grâce à composer
+
 	// require(__DIR__.'/vendor/autoload.php');
+require(__DIR__.'/vendor/autoload.php');
 
 	// 1. Vérifier que le form a bien été soumis
 if(isset($_POST['action'])) {
@@ -50,9 +52,28 @@ if(isset($_POST['action'])) {
 
 				// Equivalent à http://localhost/php/38/wf3_gamer/resetPassword.php?token=*****&email=*******
 			$resetLink = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/resetPassword.php?token='.$token.'&email='.$email;
-			mail($email, 'Forgot Password', $resetLink);
-			
-			$notifications['email'] = "Un email avec un lien de réinitialisation de mot de passe vous a été envoyé.";
+
+			$mail = new PHPMailer;
+			// Paramétrage pour se connecter au serveur mail
+			$mail->isSMTP();                                      // Set mailer to use SMTP
+			$mail->Host = 'smtp.mailgun.org';  // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                               // Enable SMTP authentication
+			$mail->Username = 'postmaster@sandbox504c3f44050c4ee3aa785151b4924429.mailgun.org';                 // SMTP username
+			$mail->Password = '5af02be0e52d7990ab876526bae4ba3e';                           // SMTP password
+			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+			$mail->Port = 587;                                    // TCP port to connect to
+
+			$mail->setFrom('no-reply@aego.fr', 'Mailer');
+			$mail->addAddress('meslem.bellal@gmail.com');               // Name is optional
+			$mail->addAddress($email);               // Name is optional
+
+			$mail->isHTML(true);                                  // Set email format to HTML
+
+			$mail->Subject = 'Changement du mot de passe';
+			$mail->Body    = '<a href="'.$resetLink.'">Cliquez ici pour changer votre mot de passe . </a> ';
+			$mail->send();
+			$notifications['email'] = "Un email vous a été envoyer ";
+ 			
 		}
 		else {
 			$errors['gamers'] = "L'utilisateur n'existe pas";	
@@ -130,4 +151,4 @@ if(isset($_POST['action'])) {
 		</div>
 	</div>
 </body>
-</html>+
+</html>
