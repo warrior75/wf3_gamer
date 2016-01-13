@@ -5,6 +5,7 @@
     $pagesGames= 0;
     $nbJeux= 0;
     
+ 
     checkLoggedIn();
 
             if(isset($_POST['action'])) {

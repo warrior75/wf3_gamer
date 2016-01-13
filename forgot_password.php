@@ -50,9 +50,9 @@ if(isset($_POST['action'])) {
 
 				// Equivalent à http://localhost/php/38/wf3_gamer/resetPassword.php?token=*****&email=*******
 			$resetLink = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/resetPassword.php?token='.$token.'&email='.$email;
-			// mail($email, 'Forgot Password', $resetLink);
-
-			$notifications['link'] = "$resetLink";
+			mail($email, 'Forgot Password', $resetLink);
+			
+			$notifications['email'] = "Un email avec un lien de réinitialisation de mot de passe vous a été envoyé.";
 		}
 		else {
 			$errors['gamers'] = "L'utilisateur n'existe pas";	
