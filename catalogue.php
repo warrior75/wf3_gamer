@@ -7,45 +7,33 @@
     
     checkLoggedIn();
 
-            if(!isset($_POST['action'])) {
+            if(isset($_POST['action'])) {
                 // Afficher le catalogue entier
-                $query = $pdo->query('SELECT count(id) as total  FROM games');
-                $nbGames = $query->fetch();
-                $totalGames = $nbGames['total'];
-                // 2. trouver la focntion qui arrondi une décimale à son entier supérieur et utiliser la fonction
-                $limiteGames = 5;
-                $pagesGames = ceil($totalGames / $limiteGames); // valeur 5
-                // 6. récupérer la variable page envoyé en GET et l'affecter à $pageGames
-                    if (isset($_GET['page'])&& ($_GET['page']>0) && ($_GET['page']<=$pagesGames)) {
-                    $pageActive = $_GET['page'];
-                    } else {
-                        $pageActive = 1;
-                    }
-                    $debut = ($pageActive-1)*$limiteGames;
-                    // 4. COnstruire la requête SQL pour récupérer les 5 premiers Games
-                    /*echo '<pre>';
-                    print_r($contenu_page);
-                    echo '</pre>';*/
-                    $query = $pdo->prepare('SELECT * FROM games LIMIT :limit  OFFSET :offset');
-                    $query -> bindValue(':limit',$limiteGames,PDO::PARAM_INT);
-                    $query -> bindValue(':offset',$debut,PDO::PARAM_INT);
-                    $query -> execute();
-                    $resultGame = $query->fetchAll();
-            } else {
-
+               
                 $search = $_POST['search'];
                 $plateform_id = $_POST['plateform'];
                 if ($plateform_id != 0) {                         
-                    $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
-                                              INNER JOIN plateforme ON plateform_id = plateforme.id');
+                     $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
+                                              INNER JOIN plateforme ON plateform_id = plateforme.id 
+                                              WHERE title LIKE :title AND plateform_id = :plateform_id ');
+
+                    $query -> bindValue(':title','%'.$search.'%',PDO::PARAM_STR);
+                    $query -> bindValue(':plateform_id',$plateform_id,PDO::PARAM_STR);
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
                 } else {
-                    $query = $pdo -> prepare('SELECT * FROM games WHERE title LIKE :title');
+                    $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
+                                              INNER JOIN plateforme ON plateform_id = plateforme.id 
+                                              WHERE title LIKE :title');
                     $query -> bindValue(':title','%'.$search.'%',PDO::PARAM_STR);
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
                 }
+            } else {
+                     $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
+                                              INNER JOIN plateforme ON plateform_id = plateforme.id ');
+                    $query -> execute();
+                    $resultGame = $query -> fetchAll();
             }
             
     
