@@ -87,12 +87,6 @@
                 <li><a href="add_games.php">Ajoutez un jeu !</a></li>
                 <li><a href="admin.php"><?php if($_SESSION['gamers']['role'] == 'admin') echo "Admin";?></a></li>
               </ul>
-              <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-primary">Chercher</button>
-              </form>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><?php echo "Bonjour ".$_SESSION['gamers']['firstname']." !"; ?></a></li>
                 <li><a href="panier.php" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i> <?php echo $nbJeux; ?> </a></li>           
@@ -155,7 +149,12 @@
                     <h5>Titre :<?php echo $game['title'] ?></h5>
                     <h5>Plateforme :<?php echo $game['plateforme_name'] ?></h5>
                     <!-- <p><?php echo $game['description'] ?></p> -->
-                    <a href='panier.php?game_id=<?php echo $game['id'];?>&titre=<?php echo urlencode($game['title']);?>&qteJeu=1'><button type="submit" name="action" class="btn btn-success">Louer</button></a>
+                    <?php if ($game['is_available']): ?>
+                        <a href='panier.php?game_id=<?php echo $game['id'];?>&titre=<?php echo urlencode($game['title']);?>&qteJeu=1'><button type="submit" name="action" class="btn btn-success">Louer</button></a>
+                    <?php else: ?>
+                        <a><button type="submit" name="action" class="btn btn-danger" disabled >Indisponible</button></a>
+                    <?php endif; ?>
+                
                 </div>
                 <?php endforeach; ?>
             <?php else : ?>
