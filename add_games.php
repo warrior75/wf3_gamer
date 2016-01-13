@@ -121,7 +121,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="inscription.php">Inscription</a></li>
-                <li><a href="connexion.php">Connexion</a></li>
+                <li><a href="catalogue.php">Catalogue</a></li>
               </ul>
               <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">

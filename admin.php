@@ -21,10 +21,16 @@
 	$query = $pdo->query('SELECT count(id) as total FROM gamers');
 	$resultCount = $query->fetch();
 	$totalUser = $resultCount['total'];// affiche dans le page admin
-	echo $totalUser.'inscrit(s)'.'<br>';
+	
 ?>
+<h2>Statistiques</h2>
 
-Cette session est visible que pour les administrateurs
+<p>Le site contient <?php echo $totalUser ?>utilisateur(s).</p>
+
+
+<p>Cette session est visible que pour les administrateurs</p>
+
+<h1>Localisation des utilisateurs</h1>
 
     <style type="text/css">
      
@@ -59,5 +65,9 @@ function initMap() {
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFHyhOE1lniNGNo0yrkthO-wEUp4OOzM&callback=initMap">
     </script>
+<h1>Les derniers jeux ajoutés par les inscrits</h1>
+
+
+
   </body>
 </html>
