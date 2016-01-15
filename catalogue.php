@@ -18,7 +18,9 @@
     $nbPagesGames = ceil($totalGames/$limitGames); // valeur qui change en fonction du nombre de jeux inscrits par les joueurs
 
     // Nous récupérons la page active en GET
-    if(isset($_GET['page'])) {
+
+
+    if(isset($_GET['page']) && !empty($_GET['page'])) {
         $pageActiveGamer = $_GET['page'];
       }
       else {
@@ -195,7 +197,7 @@
               <?php endif;?>
             <?php endif; ?>
 
-            <?php if ($nbPagesGames): ?>
+            
 
                   
            <!-- pagination du bas de la page -->
@@ -205,7 +207,7 @@
                             <?php if($pageActiveGamer > 1): ?>
                             <li>
                                 <a href="catalogue.php?page= <?php echo $pageActiveGamer-1; ?> " aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
+                                    <span aria-hidden="true">Précédent</span>
                                 </a>
                             </li>
                           <?php endif; ?>
@@ -223,13 +225,13 @@
                             <li>
                                 <!-- le lien pointe vers le numéro de la page courante +1 récupéré en GET -->
                                 <a href="catalogue.php?page= <?php echo $pageActiveGamer+1; ?> " aria-label="Next"> 
-                                    <span aria-hidden="true">&raquo;</span>
+                                    <span aria-hidden="true">Suivant</span>
                                 </a>
                             </li>
                           <?php endif; ?>
                       </ul>
                     </div>
-            <?php endif; ?>
+            
  
 
        
