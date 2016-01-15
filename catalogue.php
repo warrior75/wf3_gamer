@@ -2,9 +2,27 @@
     session_start();
     require_once(__DIR__.'/config/db.php');
     require(__DIR__.'/functions.php');
-    $pagesGames= 0;
-    $nbJeux= 0;
+   
+   $nbGamesRent="";
+
+    /*1. Faire une requête pour récupérer le nombre total de jeux */
+    $query=$pdo->prepare('SELECT COUNT(*) AS total FROM games');
+
+    $query->execute();
+    $countGames=$query->fetch();
+    $totalGames=$countGames['total'];
+    /*print_r($totalGames);*/
+
+    /*2. Détermination du nombre de pages en fonction des informations et de la page active*/
+    $limitGames = 5;
+    $nbPagesGames = ceil($totalGames/$limitGames); // valeur qui change en fonction du nombre de jeux inscrits par les joueurs
+
+    // Nous récupérons la page active en GET
+    $pageActiveGamer = $_GET['page'];
+
+    /*4. Définir la requête permettant de récupérer les 5 premiers résultat*/
     
+
  
     checkLoggedIn();
 
@@ -89,7 +107,7 @@
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><?php echo "Bonjour ".$_SESSION['gamers']['firstname']." !"; ?></a></li>
-                <li><a href="panier.php" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i> <?php echo $nbJeux; ?> </a></li>           
+                <li><a href="panier.php" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i> <?php echo $nbGamesRent; ?> </a></li>           
                 <li><a href="logout.php">Déconnexion</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
@@ -164,14 +182,14 @@
                 </div>
               <?php endif;?>
             <?php endif; ?>
-            <?php if ($pagesGames): ?>
+            <?php if ($nbPagesGames): ?>
                   
         <!-- pagination du bas de la page -->
                     <div>                    
                       <ul class="pagination">
                       <!-- 8. mettre la pagination suivant et prédedent -->
                             <li>
-                                <a href="catalogue.php?page= <?php echo $pageActive-1; ?> " aria-label="Previous">
+                                <a href="catalogue.php?page= <?php echo $pageActiveGamer-1; ?> " aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -179,12 +197,12 @@
                       <!-- 3. Construire la pagination pour n nombres de pages $pagesGames -->
                         
                     
-                            <?php for ($i=1; $i <= $pagesGames ; $i++): ?>
-                           <li class="<?php if ($i == $pageActive ){echo 'active';}?>"><a href="catalogue.php?page=<?php echo $i; ?>"> <?php echo $i; ?></a></li>
+                            <?php for ($i=1; $i <= $nbPagesGames ; $i++): ?>
+                           <li class="<?php if ($i == $pageActiveGamer ){echo 'active';}?>"><a href="catalogue.php?page=<?php echo $i; ?>"> <?php echo $i; ?></a></li>
                              <?php endfor; ?>
                             <li>
                                 <!-- le lien pointe vers le numéro de la page courante +1 récupéré en GET -->
-                                <a href="catalogue.php?page= <?php echo $pageActive+1; ?> " aria-label="Next"> 
+                                <a href="catalogue.php?page= <?php echo $pageActiveGamer+1; ?> " aria-label="Next"> 
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
