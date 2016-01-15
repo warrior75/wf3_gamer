@@ -18,10 +18,23 @@
     $nbPagesGames = ceil($totalGames/$limitGames); // valeur qui change en fonction du nombre de jeux inscrits par les joueurs
 
     // Nous récupérons la page active en GET
-    $pageActiveGamer = $_GET['page'];
+    if(isset($_GET['page'])) {
+        $pageActiveGamer = $_GET['page'];
+      }
+      else {
+        $pageActiveGamer = 1;
+      }
 
-    /*4. Définir la requête permettant de récupérer les 5 premiers résultat*/
-    
+    /*4. Définir la requête permettant de récupérer les 5 premiers résultat et définir la variable de limit offset*/
+
+    $offsetGames = ($pageActiveGamer - 1) * $limitGames;
+
+    $query=$pdo->prepare('SELECT * FROM games LIMIT :limit OFFSET :offset');
+    $query->bindValue(':limit',$limitGames, PDO::PARAM_INT);
+    $query->bindValue(':offset',$offsetGames,PDO::PARAM_INT);
+    $query->execute();
+
+    $resultGame = $query->fetchAll();
 
  
     checkLoggedIn();
@@ -159,7 +172,7 @@
             <?php if (!empty($resultGame)): ?>
                 
             
-            <!-- 2. Dynamiser avec php -->
+            <!-- 5. Afficher le résultat de la recherche avec la limite et l'offset-->
                 <?php foreach($resultGame as $key => $game): ?>
                 <div class="fiche">
                     <img src="<?php echo $game['url_img']; ?>" height="170" width="120">
@@ -189,11 +202,13 @@
                     <div>                    
                       <ul class="pagination">
                       <!-- 8. mettre la pagination suivant et prédedent -->
+                            <?php if($pageActiveGamer > 1): ?>
                             <li>
                                 <a href="catalogue.php?page= <?php echo $pageActiveGamer-1; ?> " aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
+                          <?php endif; ?>
 
                       <!-- 3. Construire la pagination pour n nombres de pages $pagesGames -->
 
@@ -203,12 +218,15 @@
                            <li class="<?php if ($i == $pageActiveGamer ){echo 'active';}?>"><a href="catalogue.php?page=<?php echo $i; ?>"> <?php echo $i; ?></a></li>
 
                              <?php endfor; ?>
+
+                            <?php if($pageActiveGamer < $nbPagesGames):?>
                             <li>
                                 <!-- le lien pointe vers le numéro de la page courante +1 récupéré en GET -->
                                 <a href="catalogue.php?page= <?php echo $pageActiveGamer+1; ?> " aria-label="Next"> 
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
+                          <?php endif; ?>
                       </ul>
                     </div>
             <?php endif; ?>
