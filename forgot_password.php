@@ -72,7 +72,7 @@ if(isset($_POST['action'])) {
 			$mail->Subject = 'Changement du mot de passe';
 			$mail->Body    = '<a href="'.$resetLink.'">Cliquez ici pour changer votre mot de passe . </a> ';
 			$mail->send();
-			$notifications['email'] = "Un email vous a été envoyer ";
+			$notifications['email'] = "Un email vous a été envoyé ";
  			
 		}
 		else {
@@ -118,26 +118,27 @@ if(isset($_POST['action'])) {
 		<div class="row">
 
 
-
-			<?php if(!empty($errors)): ?>
-				<div class="alert alert-danger">
-					<?php foreach ($errors as $keyError => $error) : ?>
-						<p><?php echo $error; ?></p>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
-
-			<?php if(!empty($notifications)): ?>
-				<div class="bg-info">
-					<?php foreach ($notifications as $keyNotif => $notif) : ?>
-						<p><?php echo $notif; ?></p>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
+			
+			
 
 
 
 			<div class="formConnexion col-md-4 col-md-offset-4">
+				<?php if(!empty($errors)): ?>
+					<div class="alert alert-danger">
+						<?php foreach ($errors as $keyError => $error) : ?>
+							<p><?php echo $error; ?></p>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+
+				<?php if(!empty($notifications)): ?>
+					<div class="alert alert-info">
+						<?php foreach ($notifications as $keyNotif => $notif) : ?>
+							<p><?php echo $notif; ?></p>
+						<?php endforeach; ?>
+					</div>
+			<?php endif; ?>
 
 				<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 					<div class="form-group">

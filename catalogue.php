@@ -54,7 +54,6 @@
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
             }
-            
     
 ?>
 <!DOCTYPE html>
@@ -182,9 +181,14 @@
                 </div>
               <?php endif;?>
             <?php endif; ?>
+<<<<<<< HEAD
             <?php if ($nbPagesGames): ?>
+=======
+
+            <?php if ($pagesGames): ?>
+>>>>>>> origin/master
                   
-        <!-- pagination du bas de la page -->
+           <!-- pagination du bas de la page -->
                     <div>                    
                       <ul class="pagination">
                       <!-- 8. mettre la pagination suivant et prédedent -->
@@ -195,10 +199,15 @@
                             </li>
 
                       <!-- 3. Construire la pagination pour n nombres de pages $pagesGames -->
+<<<<<<< HEAD
                         
                     
                             <?php for ($i=1; $i <= $nbPagesGames ; $i++): ?>
                            <li class="<?php if ($i == $pageActiveGamer ){echo 'active';}?>"><a href="catalogue.php?page=<?php echo $i; ?>"> <?php echo $i; ?></a></li>
+=======
+                            <?php for ($i=1; $i <= $pagesGames ; $i++): ?>
+                           <li class="<?php if ($i == $pageActive ){echo 'active';}?>"><a href="catalogue.php?page=<?php echo $i; ?>"> <?php echo $i; ?></a></li>
+>>>>>>> origin/master
                              <?php endfor; ?>
                             <li>
                                 <!-- le lien pointe vers le numéro de la page courante +1 récupéré en GET -->
@@ -209,9 +218,14 @@
                       </ul>
                     </div>
             <?php endif ?>
+ 
 
        
-       
+        <div>
+          <footer>
+              <p>&copy; Mohand, Nadia , Bilel, Cesario</p>
+          </footer>
+        </div>
         
 
         </div>
@@ -219,11 +233,7 @@
         
 
 </div>
-<div>
-    <footer>
-        <p>&copy; Mohand, Nadia , Bilel, Cesario</p>
-    </footer>
-</div>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

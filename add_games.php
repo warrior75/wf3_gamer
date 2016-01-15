@@ -131,14 +131,8 @@
                 <li class="active"><a href="inscription.php">Inscription</a></li>
                 <li><a href="catalogue.php">Catalogue</a></li>
               </ul>
-              <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-primary">Chercher</button>
-              </form>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Louer</a></li>
+                <li><a href="#"><?php echo "Bonjour ".$_SESSION['gamers']['firstname']." !"; ?></a></li>
                 <li><a href="panier.php" >Panier <i class="glyphicon glyphicon-shopping-cart" ></i></a></li>           
                 <li><a href="logout.php">Déconnexion</a></li>
               </ul>
@@ -243,7 +237,7 @@
             </form>
             
             <footer>
-                <p>&copy; Mohand, Nadia , Bilel</p>
+                <p>&copy; Mohand, Nadia , Bilel et Césario</p>
             </footer>
         </div>
     
