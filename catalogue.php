@@ -181,12 +181,9 @@
                 </div>
               <?php endif;?>
             <?php endif; ?>
-<<<<<<< HEAD
-            <?php if ($nbPagesGames): ?>
-=======
 
-            <?php if ($pagesGames): ?>
->>>>>>> origin/master
+            <?php if ($nbPagesGames): ?>
+
                   
            <!-- pagination du bas de la page -->
                     <div>                    
@@ -199,15 +196,12 @@
                             </li>
 
                       <!-- 3. Construire la pagination pour n nombres de pages $pagesGames -->
-<<<<<<< HEAD
+
                         
                     
                             <?php for ($i=1; $i <= $nbPagesGames ; $i++): ?>
                            <li class="<?php if ($i == $pageActiveGamer ){echo 'active';}?>"><a href="catalogue.php?page=<?php echo $i; ?>"> <?php echo $i; ?></a></li>
-=======
-                            <?php for ($i=1; $i <= $pagesGames ; $i++): ?>
-                           <li class="<?php if ($i == $pageActive ){echo 'active';}?>"><a href="catalogue.php?page=<?php echo $i; ?>"> <?php echo $i; ?></a></li>
->>>>>>> origin/master
+
                              <?php endfor; ?>
                             <li>
                                 <!-- le lien pointe vers le numéro de la page courante +1 récupéré en GET -->
@@ -217,7 +211,7 @@
                             </li>
                       </ul>
                     </div>
-            <?php endif ?>
+            <?php endif; ?>
  
 
        
