@@ -31,13 +31,13 @@
 
     $offsetGames = ($pageActiveGamer - 1) * $limitGames;
 
-    $query=$pdo->prepare('SELECT * FROM games LIMIT :limit OFFSET :offset');
+/*    $query=$pdo->prepare('SELECT * FROM games LIMIT :limit OFFSET :offset');
     $query->bindValue(':limit',$limitGames, PDO::PARAM_INT);
     $query->bindValue(':offset',$offsetGames,PDO::PARAM_INT);
     $query->execute();
 
-    $resultGame = $query->fetchAll();
-
+    $resultGame1 = $query->fetchAll();
+*/
  
     checkLoggedIn();
 
@@ -49,23 +49,29 @@
                 if ($platform_id != 0) {                         
                      $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
                                               INNER JOIN plateforme ON platform_id = plateforme.id 
-                                              WHERE title LIKE :title AND platform_id = :platform_id ');
+                                              WHERE title LIKE :title AND platform_id = :platform_id LIMIT :limit OFFSET :offset');
 
                     $query -> bindValue(':title','%'.$search.'%',PDO::PARAM_STR);
                     $query -> bindValue(':platform_id',$platform_id,PDO::PARAM_STR);
+                    $query->bindValue(':limit',$limitGames, PDO::PARAM_INT);
+                    $query->bindValue(':offset',$offsetGames,PDO::PARAM_INT);
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
                 } else {
                     $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
                                               INNER JOIN plateforme ON platform_id = plateforme.id 
-                                              WHERE title LIKE :title');
+                                              WHERE title LIKE :title LIMIT :limit OFFSET :offset');
                     $query -> bindValue(':title','%'.$search.'%',PDO::PARAM_STR);
+                    $query->bindValue(':limit',$limitGames, PDO::PARAM_INT);
+                    $query->bindValue(':offset',$offsetGames,PDO::PARAM_INT);
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
                 }
             } else {
                      $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
-                                              INNER JOIN plateforme ON platform_id = plateforme.id ');
+                                              INNER JOIN plateforme ON platform_id = plateforme.id LIMIT :limit OFFSET :offset');
+                    $query->bindValue(':limit',$limitGames, PDO::PARAM_INT);
+                    $query->bindValue(':offset',$offsetGames,PDO::PARAM_INT);
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
             }
@@ -171,16 +177,28 @@
 
   </div>
          <div class="col-md-9" id="catalogue">
-            <?php if (!empty($resultGame)): ?>
+            <?php if (isset($_POST['action'])): ?>
                 
+          <!-- Afficher le nombre de résultat trouvés, sinon en bas, un message d'alerte s'affiche -->        
             
-            <!-- 5. Afficher le résultat de la recherche avec la limite et l'offset-->
+            <?php 
+            $nbResultGames= count($resultGame);
+            if ($nbResultGames > 0) {
+              echo '<strong>'.$nbResultGames.' '.'resultats trouvés!'.'<strong>'.'<br>';
+            }
+?>
+
+            <!-- 5. Afficher le résultat de la recherche par page-->
+
                 <?php foreach($resultGame as $key => $game): ?>
                 <div class="fiche">
                     <img src="<?php echo $game['url_img']; ?>" height="170" width="120">
                     <h5>Titre :<?php echo $game['title'] ?></h5>
                     <h5>Plateforme :<?php echo $game['plateforme_name'] ?></h5>
                     <!-- <p><?php echo $game['description'] ?></p> -->
+
+            <!-- 6.Désactiver le bouter "Louer" quand le jeu est indisponible, soit en "false" -->
+
                     <?php if ($game['is_available']): ?>
                         <a href='panier.php?game_id=<?php echo $game['id'];?>&titre=<?php echo urlencode($game['title']);?>&qteJeu=1'><button type="submit" name="action" class="btn btn-success">Louer</button></a>
                     <?php else: ?>
@@ -190,7 +208,7 @@
                 </div>
                 <?php endforeach; ?>
             <?php else : ?>
-              <?php if(isset($_POST['action'])):?>
+              <?php if(empty($resultGame)):?>
                 <div class="alert alert-info">
                     <p>Aucun jeu ne correspond à votre recherche</p>
                 </div>
@@ -200,7 +218,7 @@
             
 
                   
-           <!-- pagination du bas de la page -->
+           <!-- 7. Pagination du bas de la page -->
                     <div>                    
                       <ul class="pagination">
                       <!-- 8. mettre la pagination suivant et prédedent -->
