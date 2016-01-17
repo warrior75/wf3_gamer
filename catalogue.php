@@ -31,12 +31,13 @@
 
     $offsetGames = ($pageActiveGamer - 1) * $limitGames;
 
+
 /*    $query=$pdo->prepare('SELECT * FROM games LIMIT :limit OFFSET :offset');
     $query->bindValue(':limit',$limitGames, PDO::PARAM_INT);
     $query->bindValue(':offset',$offsetGames,PDO::PARAM_INT);
     $query->execute();
 
-    $resultGame1 = $query->fetchAll();
+    $resultGame2 = $query->fetchAll();
 */
  
     checkLoggedIn();
@@ -57,6 +58,7 @@
                     $query->bindValue(':offset',$offsetGames,PDO::PARAM_INT);
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
+
                 } else {
                     $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
                                               INNER JOIN plateforme ON platform_id = plateforme.id 
@@ -154,11 +156,12 @@
                 <form method="POST" action="#"> 
                   <div class="form-group">
                     <label for="search">Rechercher :</label>
-                    <input type="text" name="search" class="form-control" placeholder="search">
+                    <input type="text" name="search" class="form-control" placeholder="search" value="<?php if(isset($_POST['search'])) echo $_POST['search']; ?>">
                 </div>
                 <div class="form-group">
-                  <label for="plateform">Plateform :</label>
-                  <select class="form-control" id="plateform" name="plateform">
+                  <label for="plateform">Plateform :</label>         
+
+                  <select class="form-control" id="plateform" name="plateform" value="">
                     <option selected value="0">TOUS</option>
                     <option value="1">PC</option>
                     <option value="2">XBOX ONE</option>
@@ -169,7 +172,7 @@
 
             <div class="checkbox">
                 <label>
-                  <input type="checkbox" name="disponible"> Disponible Immédiatement
+                  <input type="checkbox" name="disponible" <?php if(isset($_POST['disponible'])) echo "checked"; ?>> Disponible Immédiatement
               </label>
           </div>
           <button type="submit" name="action" class="btn btn-primary">Rechercher</button>
