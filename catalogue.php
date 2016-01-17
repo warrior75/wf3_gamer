@@ -239,8 +239,10 @@
                       <!-- 3. Construire la pagination pour n nombres de pages $pagesGames -->
 
                         
-                    
-                            <?php for ($i=1; $i <= $nbPagesGames ; $i++): ?>
+                            
+                            <?php 
+                            if(!empty($resultGame) && isset($_POST['action'])):
+                            for ($i=1; $i <= $nbPagesGames ; $i++): ?>
                            <li class="<?php if ($i == $pageActiveGamer ){echo 'active';}?>"><a href="catalogue.php?page=<?php echo $i; ?>"> <?php echo $i; ?></a></li>
 
                              <?php endfor; ?>
@@ -252,7 +254,8 @@
                                     <span aria-hidden="true">Suivant</span>
                                 </a>
                             </li>
-                          <?php endif; ?>
+                           <?php endif; ?>
+                           <?php endif; ?>
                       </ul>
                     </div>
             
