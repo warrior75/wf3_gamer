@@ -186,8 +186,11 @@
             
             <?php 
             $nbResultGames= count($resultGame);
-            if ($nbResultGames > 0) {
+            if ($nbResultGames > 1) {
               echo '<strong>'.$nbResultGames.' '.'resultats trouvés!'.'<strong>'.'<br>';
+            }
+            elseif ($nbResultGames = 1) {
+              echo '<strong>'.$nbResultGames.' '.'resultat trouvé!'.'<strong>'.'<br>';
             }
 ?>
 
