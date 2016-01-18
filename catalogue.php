@@ -192,7 +192,7 @@
             elseif ($nbResultGames == 1) {
               echo '<strong>'.$nbResultGames.' '.'resultat trouvé!'.'<strong>'.'<br>';
             }
-            else{
+            elseif($nbResultGames == 0){
               echo'<div class="alert alert-info">'.'<p>';
               echo "Aucun jeu ne correspond à votre recherche";
               echo '</p>'.'</div>';
