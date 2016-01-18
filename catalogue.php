@@ -32,13 +32,7 @@
     $offsetGames = ($pageActiveGamer - 1) * $limitGames;
 
 
-/*    $query=$pdo->prepare('SELECT * FROM games LIMIT :limit OFFSET :offset');
-    $query->bindValue(':limit',$limitGames, PDO::PARAM_INT);
-    $query->bindValue(':offset',$offsetGames,PDO::PARAM_INT);
-    $query->execute();
 
-    $resultGame2 = $query->fetchAll();
-*/
  
     checkLoggedIn();
 
@@ -69,14 +63,17 @@
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
                 }
-            } else {
+                }
+                 else {
                      $query = $pdo -> prepare('SELECT games.*,plateforme.name as plateforme_name FROM games 
                                               INNER JOIN plateforme ON platform_id = plateforme.id LIMIT :limit OFFSET :offset');
                     $query->bindValue(':limit',$limitGames, PDO::PARAM_INT);
                     $query->bindValue(':offset',$offsetGames,PDO::PARAM_INT);
                     $query -> execute();
                     $resultGame = $query -> fetchAll();
-            }
+                    }
+            
+
     
 ?>
 <!DOCTYPE html>
@@ -228,7 +225,7 @@
                       <!-- 8. mettre la pagination suivant et prédedent -->
                             <?php if($pageActiveGamer > 1): ?>
                             <li>
-                                <a href="catalogue.php?page=<?php echo $pageActiveGamer-1; ?>" aria-label="Previous">
+                                <a href="catalogue.php?page=<?php echo $pageActiveGamer-1;?>" aria-label="Previous">
                                     <span aria-hidden="true">Précédent</span>
                                 </a>
                             </li>
