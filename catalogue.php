@@ -228,7 +228,7 @@
                       <!-- 8. mettre la pagination suivant et prédedent -->
                             <?php if($pageActiveGamer > 1): ?>
                             <li>
-                                <a href="catalogue.php?page= <?php echo $pageActiveGamer-1; ?> " aria-label="Previous">
+                                <a href="catalogue.php?page=<?php echo $pageActiveGamer-1; ?>" aria-label="Previous">
                                     <span aria-hidden="true">Précédent</span>
                                 </a>
                             </li>
@@ -241,14 +241,14 @@
                             <?php 
                             if(!empty($resultGame) && isset($_POST['action'])):
                             for ($i=1; $i <= $nbPagesGames ; $i++): ?>
-                           <li class="<?php if ($i == $pageActiveGamer ){echo 'active';}?>"><a href="catalogue.php?page=<?php echo $i; ?>"> <?php echo $i; ?></a></li>
+                           <li class="<?php if ($i == $pageActiveGamer ){echo 'active';}?>"><a href="catalogue.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
 
                              <?php endfor; ?>
 
                             <?php if($pageActiveGamer < $nbPagesGames):?>
                             <li>
                                 <!-- le lien pointe vers le numéro de la page courante +1 récupéré en GET -->
-                                <a href="catalogue.php?page= <?php echo $pageActiveGamer+1; ?> " aria-label="Next"> 
+                                <a href="catalogue.php?page=<?php echo $pageActiveGamer+1; ?>" aria-label="Next"> 
                                     <span aria-hidden="true">Suivant</span>
                                 </a>
                             </li>
